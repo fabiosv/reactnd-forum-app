@@ -19,8 +19,8 @@ export function handleInitialData () {
       API.fetchCategories(),
       API.fetchPosts()
     ]).then(([ categories, posts ]) => {
-      console.log(categories)
-      console.log(posts)
+      // console.log(categories)
+      // console.log(posts)
       dispatch(receiveCategories(categories))
       dispatch(receivePosts(posts))
     })
