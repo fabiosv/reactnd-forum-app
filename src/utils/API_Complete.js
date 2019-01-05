@@ -1,5 +1,5 @@
 
-const api = "https://reactnd-forum-api.herokuapp.com/"
+const api = "https://reactnd-forum-api.herokuapp.com"
 
 
 // Generate a unique token for storing your bookshelf data on the backend server.
@@ -12,22 +12,22 @@ const headers = {
   'Authorization': token
 }
 
-export const get_categories = () =>
+export const fetchCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
     .then(data => data)
 
-export const get_category_posts = (category_id) =>
+export const getCategoryPosts = (category_id) =>
   fetch(`${api}/${category_id}/posts`, { headers })
     .then(res => res.json())
     .then(data => data)
 
-export const get_all_posts = () =>
+export const fetchPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
     .then(data => data)
 
-export const add_new_post = (post) =>
+export const addNewPost = (post) =>
   fetch(`${api}/posts`, {
       method: 'POST',
       headers: {
@@ -37,12 +37,12 @@ export const add_new_post = (post) =>
       body: JSON.stringify({ post })
     }).then(res => res.json())
 
-export const get_post = (post_id) =>
+export const getPost = (post_id) =>
   fetch(`${api}/posts/${post_id}`, { headers })
     .then(res => res.json())
     .then(data => data)
 
-export const vote_on_post = (post_id, option) =>
+export const voteOnPost = (post_id, option) =>
   fetch(`${api}/posts/${post_id}`, {
     method: 'POST',
     headers: {
@@ -52,7 +52,7 @@ export const vote_on_post = (post_id, option) =>
     body: JSON.stringify({ option })
   }).then(res => res.json())
 
-export const update_post = (post_id, data) =>
+export const updatePost = (post_id, data) =>
   fetch(`${api}/posts/${post_id}`, {
     method: 'PUT',
     headers: {
@@ -62,7 +62,7 @@ export const update_post = (post_id, data) =>
     body: JSON.stringify({ data })
   }).then(res => res.json())
 
-export const delete_post = (post_id) =>
+export const deletePost = (post_id) =>
   fetch(`${api}/posts/${post_id}`, {
     method: 'DELETE',
     headers: {
@@ -74,12 +74,12 @@ export const delete_post = (post_id) =>
   .then(res => res.json())
   .then(res => alert(res))
 
-export const get_post_comments = (post_id) =>
+export const getPostComments = (post_id) =>
   fetch(`${api}/posts/${post_id}/comments`, { headers })
     .then(res => res.json())
     .then(data => data)
 
-export const add_comment = (comment_data) =>
+export const addComment = (comment_data) =>
   fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
@@ -89,12 +89,12 @@ export const add_comment = (comment_data) =>
     body: JSON.stringify({ comment_data })
   }).then(res => res.json())
 
-export const get_comment = (comment_id) =>
+export const getComment = (comment_id) =>
   fetch(`${api}/comments/${comment_id}`, { headers })
     .then(res => res.json())
     .then(data => data)
 
-export const vote_on_comment = (comment_id, option) =>
+export const voteOnComment = (comment_id, option) =>
   fetch(`${api}/comments/${comment_id}`, {
     method: 'POST',
     headers: {
@@ -104,7 +104,7 @@ export const vote_on_comment = (comment_id, option) =>
     body: JSON.stringify({ option })
   }).then(res => res.json())
 
-export const update_comment = (comment_id, comment_data) =>
+export const updateComment = (comment_id, comment_data) =>
   fetch(`${api}/comments/${comment_id}`, {
     method: 'PUT',
     headers: {
@@ -114,7 +114,7 @@ export const update_comment = (comment_id, comment_data) =>
     body: JSON.stringify({ comment_data })
   }).then(res => res.json())
 
-export const delete_comment = (comment_id) =>
+export const deleteComment = (comment_id) =>
   fetch(`${api}/comments/${comment_id}`, {
     method: 'DELETE',
     headers: {
