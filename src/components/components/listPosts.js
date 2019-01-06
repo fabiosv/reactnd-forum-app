@@ -27,11 +27,12 @@ class ListPosts extends Component {
     }
   }
   render() {
-    const {posts} = this.props
+    const {posts, selectedCategory} = this.props;
+    const filtred_posts = selectedCategory === 'all' ? posts : posts.filter((post) => post.category === selectedCategory)
     return(
       <div id='posts' className='offset-3 col-8'>
         <h4>Posts</h4>
-        {posts.sort(this.sort).map((post) => (
+        {filtred_posts.sort(this.sort).map((post) => (
           <PostCard
             key={post.id}
             post={post}
@@ -45,5 +46,6 @@ class ListPosts extends Component {
 }
 
 export default connect((state) => ({
-  posts: state.posts
+  posts: state.posts,
+  selectedCategory: state.selectedCategory,
 }))(ListPosts)
