@@ -14,10 +14,10 @@ class App extends Component {
     console.log(this.store.getState())
   }
   componentDidMount () {
-    const { dispatch, subscribe, getState } = this.props
+    const { dispatch, subscribe } = this.props
 
     dispatch(handleInitialData())
-    subscribe(() => console.log(getState()))
+    // store.subscribe(() => console.log(store.getState()))
     
   }
   // componentWillUnmount(){

@@ -1,0 +1,47 @@
+.tools {
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.author {
+  width: fit-content;
+  float: right;
+}
+
+.comments {
+  width: fit-content;
+  margin: auto;
+}
+
+.post {
+  /* border-radius: 5px;
+  box-shadow: hsla(0, 0, 0, .2) 0 4px 2px -2px; */
+  margin-bottom: 15px;
+  display: block;
+}
+
+.vote {
+  /* float: left; */
+  display: inline-block;
+  /* width: 30px; */
+}
+
+.vote p {
+  margin: 0px;
+}
+
+.card-body {
+  display: inline-block;
+  width: 88%;
+}
+
+.post a {
+  color: #4d4dff;
+  text-decoration: none;
+  transition: .25s ease;
+  &:hover {
+    border-color: #ff4d4d;
+    color: #ff4d4d;
+  }
+}

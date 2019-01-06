@@ -12,14 +12,12 @@
 // }
 
 import {ADD_COMMENT} from '../actions/comments'
-import {RECEIVE_DATA} from '../actions/shared'
+// import {RECEIVE_DATA} from '../actions/shared'
 
 export default function comments (state = [], action) {
   switch(action.type){
     case ADD_COMMENT :
       return 0
-    case RECEIVE_DATA :
-      return comments.goals
     default :
       return state
   }
