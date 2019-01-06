@@ -4,26 +4,23 @@ import './posts.css'
 import {string, func} from 'prop-types'
 import { FaRegFrownOpen, FaRegGrinHearts } from 'react-icons/fa'
 
-class Vote extends Component {
-  static propTypes = {
-    voteScore: string.isRequired,
-    onScoreUp: func.isRequired,
-    onScoreDown: func.isRequired,
-  }
+function Vote (props) {
+  // static propTypes = {
+    // voteScore: string.isRequired,
+  //   onScoreUp: func.isRequired,
+  //   onScoreDown: func.isRequired,
+  // }
   // removeItem = (todo) => {
   //   this.props.dispatch(handleDeleteTodo(todo))
   // }
-
-  render(){
-    const {voteScore, onScoreUp, onScoreDown} = this.props;
-    return(
-      <span className='vote'>
-        <FaRegGrinHearts></FaRegGrinHearts>
-        <p>{voteScore}</p>
-        <FaRegFrownOpen></FaRegFrownOpen>
-      </span>
-    )
-  }
+  const {voteScore, onScoreUp, onScoreDown} = props;
+  return(
+    <span className='vote'>
+      <a onClick={onScoreUp}><FaRegGrinHearts></FaRegGrinHearts></a>
+      <p>{voteScore}</p>
+      <a onClick={onScoreDown}><FaRegFrownOpen></FaRegFrownOpen></a>
+    </span>
+  )
 }
 
 export default Vote

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import './mainPage.css'
-import './posts.css'
 import { IoIosArrowUp, IoIosArrowDown, IoMdCreate, IoMdTrash, IoIosContact } from "react-icons/io"
 import { FaComments, FaPlus, FaRegFrownOpen, FaRegGrinHearts } from 'react-icons/fa'
 import ConnectedCategories from '../components/categories'
+import ConnectedListPosts from '../components/listPosts'
 
 class MainPage extends Component {
   state = {}
@@ -24,7 +24,8 @@ class MainPage extends Component {
       <div>
         <div className='header'><h2>Leitura</h2></div>
         <ConnectedCategories />
-        <div id='posts'>
+        <ConnectedListPosts />
+        {/* <div id='posts'>
             <div className='offset-3 col-8'>
               <h4>Posts</h4>
               {posts.map((post) => (
@@ -50,7 +51,7 @@ class MainPage extends Component {
                 </div>
               ))}
             </div>
-        </div>
+        </div> */}
       </div>
     )
   }
