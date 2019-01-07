@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import './mainPage.css'
-import { IoIosArrowUp, IoIosArrowDown, IoMdCreate, IoMdTrash, IoIosContact } from "react-icons/io"
-import { FaComments, FaPlus, FaRegFrownOpen, FaRegGrinHearts } from 'react-icons/fa'
 import ConnectedCategories from '../components/categories'
 import ConnectedListPosts from '../components/listPosts'
+import Loader from '../components/loader'
 
 class MainPage extends Component {
   state = {}
@@ -23,6 +22,7 @@ class MainPage extends Component {
     return(
       <div>
         <div className='header'><h2>Leitura</h2></div>
+        <Loader loading={this.props.loading}/>
         <ConnectedCategories />
         <ConnectedListPosts />
         {/* <div id='posts'>
@@ -59,5 +59,6 @@ class MainPage extends Component {
 
 export default connect((state) => ({
   categories: state.categories,
-  posts: state.posts
+  posts: state.posts,
+  loading: state.loading,
 }))(MainPage)

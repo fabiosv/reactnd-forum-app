@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { IoMdCreate, IoMdTrash, IoIosContact } from "react-icons/io"
-import { FaComments, FaRegFrownOpen, FaRegGrinHearts } from 'react-icons/fa'
+import { FaComments } from 'react-icons/fa'
 import Vote from './vote'
 class PostCard extends Component {
   onScoreUp = () => {
@@ -22,17 +22,17 @@ class PostCard extends Component {
     return(
       <div className='card post shadow'>
         <div className='tools'>
-          <IoMdCreate></IoMdCreate>
-          <IoMdTrash></IoMdTrash>
+          <IoMdCreate />
+          <IoMdTrash />
         </div>
         <Vote voteScore={post.voteScore} onScoreUp={this.onScoreUp} onScoreDown={this.onScoreDown}/>
           <span className='card-body'>
             <h3 className='card-title'><a href="#">{post.title}</a></h3>
             <p className='card-text'>{post.body}</p>
             <span>
-              <p className='author'><IoIosContact></IoIosContact> {post.author} <br></br> {new Date(post.timestamp).toLocaleString()}</p>
+              <p className='author'><IoIosContact /> {post.author} <br></br> {new Date(post.timestamp).toLocaleString()}</p>
               <p className='createdAt'></p>
-              <p className='comments'><FaComments></FaComments> {post.commentCount}</p>
+              <p className='comments'><FaComments /> {post.commentCount}</p>
             </span>
           </span>
       </div>
