@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import PostCard from './postCard'
 import {voteOnPost, postScoredUp, postScoredDown} from '../../actions/posts'
+import { FaPlus, FaFilter } from "react-icons/fa"
+import { Link } from 'react-router-dom'
 
 class ListPosts extends Component {
   state = {
@@ -19,6 +21,12 @@ class ListPosts extends Component {
     this.props.dispatch(postScoredDown(post_id))
   }
 
+  alterSortType = () => {
+    this.setState((currentState) => ({
+      sortByDate: !currentState.sortByDate,
+    }))
+  }
+
   sort = (a,b) => {
     if (this.state.sortByDate) {
       return (b.timestamp - a.timestamp)
@@ -31,6 +39,13 @@ class ListPosts extends Component {
     const filtred_posts = selectedCategory === 'all' ? posts : posts.filter((post) => post.category === selectedCategory)
     return(
       <div id='posts' className='offset-3 col-8'>
+        <span className='tools'>
+          <Link to='/new-post' id='add-post' title='Add New Post' alt='Button to Add New Post'><FaPlus/></Link>
+          <a id='filter-posts'
+            title={this.state.sortByDate ? 'Sort By High Score' : 'Sort By Date'}
+            onClick={(e) => this.alterSortType()}
+            alt='Button to Alter Filter to Score/Date'><FaFilter/></a>
+        </span>
         <h4>Posts</h4>
         {filtred_posts.sort(this.sort).map((post) => (
           <PostCard

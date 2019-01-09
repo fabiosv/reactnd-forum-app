@@ -1,3 +1,14 @@
+#posts {
+  background-color: lightgray;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+#add-post {
+  padding-right: 10px;
+  color: #343a40;
+}
+
 .tools {
   float: right;
   margin-right: 10px;
