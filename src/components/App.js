@@ -2,23 +2,14 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import './App.css'
 import { connect } from 'react-redux'
-import {
-  handleInitialData
-} from '../actions/shared'
 import Demo from './views/demo'
 import ConnectedMainPage from './views/mainPage'
-import NewPost from './views/newPost'
+import ConnectedManagePost from './views/managePost'
+import ConnectedPostDetail from './views/postDetail'
 
 class App extends Component {
   getState = () => {
     console.log(this.store.getState())
-  }
-  componentDidMount () {
-    const { dispatch, subscribe } = this.props
-
-    dispatch(handleInitialData())
-    // store.subscribe(() => console.log(store.getState()))
-    
   }
   // componentWillUnmount(){
   //   this.unsubscribe()
@@ -27,15 +18,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route exact path='/' render={() => (
-          <ConnectedMainPage />
-        )} />
-        <Route exact path='/new-post' render={() => (
-          <NewPost />
-        )} />
-        <Route exact path='/demo' render={() => (
-          <Demo />
-        )} />
+        <Route exact path='/' component={ConnectedMainPage} />
+        <Route path='/post/create-update/:id' component={ConnectedManagePost}/>
+        <Route path='/post/detail/:id' component={ConnectedPostDetail}/>
+        <Route path='/demo' component={Demo} />
       </div>
     );
   }

@@ -12,6 +12,10 @@ const headers = {
   'Authorization': token
 }
 
+const generateID = () => {
+  return Math.random().toString(36).substr(2, 9)
+}
+
 export const fetchCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
@@ -34,7 +38,14 @@ export const addNewPost = (post) =>
         ...headers,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ post })
+      body: JSON.stringify({
+        id: generateID(),
+        timestamp: post.timestamp,
+        title: post.title,
+        body: post.body,
+        author: post.author,
+        category: post.category
+      })
     }).then(res => res.json())
 
 export const getPost = (post_id) =>
@@ -52,14 +63,17 @@ export const voteOnPost = (post_id, option) =>
     body: JSON.stringify({ option })
   }).then(res => res.json())
 
-export const updatePost = (post_id, data) =>
+export const updatePost = (post_id, post) =>
   fetch(`${api}/posts/${post_id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ data })
+    body: JSON.stringify({
+      title: post.title,
+      body: post.body
+    })
   }).then(res => res.json())
 
 export const deletePost = (post_id) =>
@@ -72,7 +86,7 @@ export const deletePost = (post_id) =>
     // body: JSON.stringify({id: post_id})
   })
   .then(res => res.json())
-  .then(res => alert(res))
+  .then(res => console.log(res))
 
 export const getPostComments = (post_id) =>
   fetch(`${api}/posts/${post_id}/comments`, { headers })

@@ -1,3 +1,13 @@
+:root{
+  --main-background-color: #282C34;
+  --active-background-color: #1B1D2E;
+  --color-primary-0: #282C34;	/* Main Primary color */
+  --color-primary-1: #BABCC1;
+  --color-primary-2: #65738F;
+  --color-primary-3: #19202C;
+  --color-primary-4: #010D22;
+}
+
 .App {
   text-align: center;
 }

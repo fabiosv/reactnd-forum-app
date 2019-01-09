@@ -1,21 +1,35 @@
-import {ADD_POST, RECEIVE_POSTS, POST_SCORE_UP, POST_SCORE_DOWN} from '../actions/posts'
+import {
+  RECEIVE_POSTS,
+  RECEIVE_POST_INFO,
+  ADD_POST,
+  UPDATE_POST,
+  DELETE_POST,
+  POST_SCORE_UP,
+  POST_SCORE_DOWN
+} from '../actions/posts'
 
 export default function posts (state = [], action) {
   switch(action.type){
     case ADD_POST :
-      return 0
+      return [...state, action.post]
+    case UPDATE_POST :
+      return state.map((post) => post.id === action.post.id ? action.post : post)
+    case DELETE_POST :
+      return state.filter((post) => post.id !== action.post.id)
     case RECEIVE_POSTS :
       return action.posts
     case POST_SCORE_UP:
       var index = state.findIndex((post) => post.id === action.id)
       state[index].voteScore += 1
-      // return {state}
       return JSON.parse(JSON.stringify(state))
+      // const new_state = state.map((post) => (post.id === action.id ? action.post : post))
+      // return new_state
     case POST_SCORE_DOWN:
       var index = state.findIndex((post) => post.id === action.id)
       state[index].voteScore -= 1
       return JSON.parse(JSON.stringify(state))
-      // return {state}
+    case RECEIVE_POST_INFO :
+      return action.post
     default :
       return state
   }

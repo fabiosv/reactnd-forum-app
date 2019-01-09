@@ -4,6 +4,24 @@ export const ADD_COMMENT = 'ADD_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const FETCH_POST_COMMENTS = 'FETCH_POST_COMMENTS'
+
+export function handleFetchPostComments(post_id) {
+  return (dispatch) => {
+    return API.get_post_comments(post_id)
+      .then((comments) => dispatch(receivePostComments(comments)))
+      .catch((error) =>{
+        console.log(`Post ID: ${post_id} not found`)
+      })
+  }
+}
+
+function receivePostComments(comments) {
+  return {
+    type: FETCH_POST_COMMENTS,
+    comments
+  }
+}
 
 function addComment (comment) {
   return {

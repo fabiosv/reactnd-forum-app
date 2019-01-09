@@ -1,6 +1,7 @@
 .header {
   overflow: hidden;
-  background-color: #2e7c31;
+  /* background-color: #2e7c31; */
+  background-color: var(--color-primary-0);
   /* background-color: #8D25DC; */
   /* background-color: #9d84fa; */
   padding: 20px 10px;

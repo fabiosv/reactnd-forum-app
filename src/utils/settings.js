@@ -1,4 +1,4 @@
-export const API_HOST = "https://reactnd-forum-api.herokuapp.com/"
+export const API_HOST = "https://reactnd-forum-api.herokuapp.com"
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token

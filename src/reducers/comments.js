@@ -11,11 +11,13 @@
 //   }
 // }
 
-import {ADD_COMMENT} from '../actions/comments'
+import {ADD_COMMENT, FETCH_POST_COMMENTS} from '../actions/comments'
 // import {RECEIVE_DATA} from '../actions/shared'
 
 export default function comments (state = [], action) {
   switch(action.type){
+    case FETCH_POST_COMMENTS :
+      return action.comments
     case ADD_COMMENT :
       return 0
     default :

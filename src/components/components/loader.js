@@ -1,11 +1,11 @@
-import {css} from '@emotion/core'
+// import {css} from '@emotion/core'
 import {PacmanLoader} from 'react-spinners'
 // import PacmanLoader from 'react-spinners/PacmanLoader'
 import React from 'react'
 import './loader.css'
 
 function Loader (props) {
-  const override = css `
+  const override = `
     display: block;
     margin: 0 auto;
     border-color: red;

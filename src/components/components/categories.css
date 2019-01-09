@@ -18,7 +18,7 @@ li button {
 }
 
 li button.active {
-  background-color: #4CAF50;
+  background-color: var(--active-background-color);
   color: white;
 }
 
@@ -30,8 +30,8 @@ li button:hover:not(.active) {
 .button {
   /* background-color: #4CAF50; /* Green */
   border: none;
-  color: #00A83F;
-  background-color: #6EEE90;
+  color: #010D22;
+  background-color: var(--color-primary-1);
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;

@@ -5,16 +5,18 @@ import Vote from './vote'
 class PostCard extends Component {
   onScoreUp = () => {
     const post_id = this.props.post.id;
-    this.props.onVote(post_id, 'upVote')
     this.props.onScoreUp(post_id)
     console.log(`${post_id}: 'upVote'`)
   }
 
   onScoreDown = () => {
     const post_id = this.props.post.id;
-    this.props.onVote(post_id, 'downVote')
     this.props.onScoreDown(post_id)
     console.log(`${post_id}: 'downVote'`)
+  }
+
+  onDelete = () => {
+    this.props.onDelete(this.props.post)
   }
 
   render(){
@@ -22,12 +24,12 @@ class PostCard extends Component {
     return(
       <div className='card post shadow'>
         <div className='tools'>
-          <IoMdCreate />
-          <IoMdTrash />
+          <a id="update-post" href={`/post/create-update/${post.id}`}><IoMdCreate /></a>
+          <a onClick={this.onDelete}><IoMdTrash /></a>
         </div>
         <Vote voteScore={post.voteScore} onScoreUp={this.onScoreUp} onScoreDown={this.onScoreDown}/>
-          <span className='card-body'>
-            <h3 className='card-title'><a href="#">{post.title}</a></h3>
+          <span className='card-body col-sm-9'>
+            <h3 className='card-title'><a href={`/post/detail/${post.id}`}>{post.title}</a></h3>
             <p className='card-text'>{post.body}</p>
             <span>
               <p className='author'><IoIosContact /> {post.author} <br></br> {new Date(post.timestamp).toLocaleString()}</p>
