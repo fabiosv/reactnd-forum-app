@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import './mainPage.css'
+import { withRouter } from 'react-router-dom'
 import ConnectedCategories from '../components/categories'
 import ConnectedListPosts from '../components/listPosts'
 import Loader from '../components/loader'
@@ -21,14 +22,16 @@ class MainPage extends Component {
   }
 
   componentDidMount () {
+    const { category } = this.props.match.params
     const { dispatch } = this.props
-    dispatch(handleInitialData())
+    console.log(category)
+    dispatch(handleInitialData(category))
   }
 
   render(){
     return(
       <div>
-        <Header title={"Leitura"} />
+        <Header title={"Leitura"} showIcon={true}/>
         <Loader loading={this.props.loading}/>
         <ConnectedCategories />
         <ConnectedListPosts />
@@ -37,6 +40,6 @@ class MainPage extends Component {
   }
 }
 
-export default connect((state) => ({
+export default withRouter(connect((state) => ({
   loading: state.loading,
-}))(MainPage)
+}))(MainPage))

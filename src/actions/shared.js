@@ -1,5 +1,5 @@
 import * as API from '../utils/API_Complete'
-import {receiveCategories} from './categories'
+import {receiveCategories, selectCategory} from './categories'
 import {receivePosts} from './posts'
 
 // export const RECEIVE_DATA = 'RECEIVE_DATA'
@@ -12,17 +12,16 @@ import {receivePosts} from './posts'
 //   }
 // }
 
-export function handleInitialData () {
-  console.log('handling')
+export function handleInitialData (category) {
+  if(typeof(category) === "undefined") {category = "all"}
   return (dispatch) => {
-    return Promise.all([
-      API.fetchCategories(),
-      API.fetchPosts()
-    ]).then(([ categories, posts ]) => {
+    return API.getInitialData(category)
+    .then(([ categories, posts ]) => {
       console.log(categories)
       console.log(posts)
       dispatch(receiveCategories(categories.categories))
       dispatch(receivePosts(posts))
+      dispatch(selectCategory(category))
     })
   }
 }
