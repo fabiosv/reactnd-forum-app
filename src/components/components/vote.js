@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 // import {connect} from 'react-redux'
 import './posts.css'
 import {string, func} from 'prop-types'
@@ -16,9 +16,9 @@ function Vote (props) {
   const {voteScore, onScoreUp, onScoreDown} = props;
   return(
     <span className='vote'>
-      <a onClick={onScoreUp}><FaRegGrinHearts></FaRegGrinHearts></a>
+      <button className="button2" onClick={onScoreUp}><FaRegGrinHearts></FaRegGrinHearts></button>
       <p>{voteScore}</p>
-      <a onClick={onScoreDown}><FaRegFrownOpen></FaRegFrownOpen></a>
+      <button className="button2" onClick={onScoreDown}><FaRegFrownOpen></FaRegFrownOpen></button>
     </span>
   )
 }

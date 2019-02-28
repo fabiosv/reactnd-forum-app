@@ -1,5 +1,4 @@
 import * as API from '../utils/API_Complete'
-import { dispatch } from '../../node_modules/rxjs/internal/observable/range';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST_INFO = 'RECEIVE_POST_INFO'
@@ -62,22 +61,30 @@ export function postScoredDown(post_id){
   }
 }
 
-export function handleAddPost(post) {
+export function handleAddPost(post, sucs_calb_fn, err_calb_fn) {
   return (dispatch) => {
     return API.addNewPost(post)
-      .then((p) => dispatch(addPost(post)))
+      .then((p) => {
+        dispatch(addPost(post))
+        sucs_calb_fn()
+      })
       .catch((error) =>{
-        console.log(`Post ID: ${error} not found`)
+        console.log(`Post Add Action: ${error} not found`)
+        err_calb_fn()
       })
   }
 }
 
-export function handleUpdatePost(post) {
+export function handleUpdatePost(post, sucs_calb_fn, err_calb_fn) {
   return (dispatch) => {
     return API.updatePost(post.id, post)
-      .then((p) => dispatch(updatePost(post)))
+      .then((p) => {
+        dispatch(updatePost(post))
+        sucs_calb_fn()
+      })
       .catch((error) =>{
-        console.log(`Post ID: ${error} not found`)
+        console.log(`Post Update Action: ${error} not found`)
+        err_calb_fn()
       })
   }
 }
@@ -102,27 +109,25 @@ export function handleReceivePostInfo(post_id) {
   }
 }
 
-export function handlePostScoredUp(post_id){
+export function handlePostScoredUp(post_id, err_calb_fn){
   return (dispatch) => {
+    dispatch(postScoredUp(post_id))
     return API.voteOnPost(post_id, 'upVote')
-      .then(() => {
-        dispatch(postScoredUp(post_id))
-      })
       .catch(() => {
         alert('There was an error on voting. Please Try again.')
+        err_calb_fn()
         dispatch(postScoredDown(post_id))
       })
   }
 }
 
-export function handlePostScoredDown(post_id){
+export function handlePostScoredDown(post_id, err_calb_fn){
   return (dispatch) => {
+    dispatch(postScoredDown(post_id))
     return API.voteOnPost(post_id, 'downVote')
-      .then(() => {
-        dispatch(postScoredDown(post_id))
-      })
       .catch(() => {
         alert('There was an error on voting. Please Try again.')
+        err_calb_fn()
         dispatch(postScoredUp(post_id))
       })
   }

@@ -20,16 +20,26 @@ class CommentCard extends Component {
     return(
       <div className='card post shadow'>
         <div className='tools'>
-          <a id="update-post" ><IoMdCreate /></a>
-          <a><IoMdTrash /></a>
+          <button className="button2" ><IoMdCreate /></button>
+          <button className="button2"><IoMdTrash /></button>
         </div>
-        <Vote voteScore={comment.voteScore} onScoreUp={this.onScoreUp} onScoreDown={this.onScoreDown}/>
-          <span className='card-body'>
-            <p className='card-text'>{comment.body}</p>
-            <span>
-              <p className='author'><IoIosContact /> {comment.author} <br></br> {new Date(comment.timestamp).toLocaleString()}</p>
-            </span>
+        <div style={{
+            top: '10%',
+            position: 'absolute',
+            paddingLeft: '15px',
+          }}>
+          <Vote
+            voteScore={comment.voteScore}
+            onScoreUp={this.onScoreUp}
+            onScoreDown={this.onScoreDown}
+          />
+        </div>
+        <div className='card-body col-sm-9'>
+          <p className='card-text'>{comment.body}</p>
+          <span>
+            <p className='author'><IoIosContact /> {comment.author} <br/> {new Date(comment.timestamp).toLocaleString()}</p>
           </span>
+        </div>
       </div>
     )
   }

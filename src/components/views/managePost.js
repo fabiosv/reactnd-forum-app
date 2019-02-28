@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import {handleReceivePostInfo, handleAddPost, handleUpdatePost} from '../../actions/posts'
+import {handleReceiveCategories} from '../../actions/categories'
 import './managePost.css'
 import Loader from '../components/loader'
 import Header from '../components/header'
+import Swal from 'sweetalert2'
+// import withReactContent from 'sweetalert2-react-content'
 
 class ManagePost extends Component {
   state = {
     posts: {
       author: "",
       body: "",
-      category: "",
+      category: "react",
       commentCount: 0,
       deleted: false,
       id: "",
@@ -18,8 +22,10 @@ class ManagePost extends Component {
       title: "",
       voteScore: 0,
     },
+    categories: [],
     modeCreation: true,
     loading: false,
+    toHome: false,
   }
 
   componentDidMount() {
@@ -31,6 +37,8 @@ class ManagePost extends Component {
     }))
     if(id !== 'new') {
       dispatch(handleReceivePostInfo(id))
+    } else {
+      dispatch(handleReceiveCategories())
     }
   }
 
@@ -49,7 +57,16 @@ class ManagePost extends Component {
             timestamp: posts.timestamp,
             title: posts.title,
             voteScore: posts.voteScore,
-          }
+          },
+          categories: [{name: posts.category}],
+        }))
+      }
+    }
+    if(typeof(this.props.categories.categories) === 'object'){
+      if(this.props.categories.categories.length > 0 && this.state.categories.length === 0) {
+        const {categories} = this.props.categories
+        this.setState((currentState) => ({
+          categories: categories,
         }))
       }
     }
@@ -67,20 +84,42 @@ class ManagePost extends Component {
     event.preventDefault()
     console.log('saving')
     if(this.id === 'new') {
-      this.props.dispatch(handleAddPost(this.state.posts))
+      this.props.dispatch(handleAddPost(
+        this.state.posts,
+        () => {
+          this.showAlert('Post Saved!', true)
+          this.setState((currentState) => ({
+            toHome: true
+          }))
+        },
+        () => {this.showAlert('Ops! Something went wrong, please try again', false)}
+      ))
     } else {
-      this.props.dispatch(handleUpdatePost(this.state.posts))
+      this.props.dispatch(handleUpdatePost(
+        this.state.posts,
+        () => {this.showAlert('Post Edited!', true)},
+        () => {this.showAlert('Ops! Something went wrong, please try again', false)}
+      ))
     }
+  }
+
+  showAlert = (message, sucess=true) => {
+    Swal.fire({
+      type: sucess ? 'success' : 'error',
+      text: message,
+      showConfirmButton: false,
+      timer: 3000
+    });
   }
 
   render(){
     const {id} = this.props.match.params;
     const { loading } = this.state.modeCreation ? this.state : this.props;
-    const {posts} = this.state;
+    const {posts, categories, toHome} = this.state;
+    if(toHome) {return <Redirect to="/" />}
     return(
       <div>
-        <Header title={this.state.modeCreation ? "Novo Post" : "Editar Post"} />
-        <a href="/">Main Page</a>
+        <Header title={this.state.modeCreation ? "New Post" : "Edit Post"} goBackButton={true} />
         <p>{id}</p>
         <Loader loading={loading}/>
         <form className="offset-md-2 col-md-8">
@@ -89,11 +128,20 @@ class ManagePost extends Component {
             disabled={!this.state.modeCreation}
             onChange={(event) => this.handleText('author', event.target.value)}
             value={posts.author} />
-          <input className="col-md-4 col-sm-10 offset-md-1"
+          {/* <input className="col-md-4 col-sm-10 offset-md-1"
             placeholder="Category"
             disabled={!this.state.modeCreation}
             onChange={(event) => this.handleText('category', event.target.value)}
-            value={posts.category} />
+            value={posts.category} /> */}
+          <select className="col-md-4 col-sm-10 offset-md-1"
+            placeholder="Category"
+            disabled={!this.state.modeCreation}
+            onChange={(event) => this.handleText('category', event.target.value)}
+            value={posts.category}>
+            {categories.map((category) => (
+              <option key={category.name}>{category.name}</option>
+            ))}
+          </select>
           <input className="col-md-9 col-sm-10"
             placeholder="Title"
             onChange={(event) => this.handleText('title', event.target.value)}
@@ -102,7 +150,10 @@ class ManagePost extends Component {
             placeholder="Post Info"
             onChange={(event) => this.handleText('body', event.target.value)}
             value={posts.body}></textarea>
-          <button onClick={(event) => this.save(event)}>Save</button>
+          <button
+           className="col-md-9 button"
+           disabled={this.state.posts.body.length === 0}
+           onClick={(event) => this.save(event)}>Save</button>
         </form>
       </div>
     )
@@ -113,4 +164,5 @@ class ManagePost extends Component {
 export default connect((state) => ({
   posts: state.posts,
   loading: state.loading,
+  categories: state.categories,
 }))(ManagePost)

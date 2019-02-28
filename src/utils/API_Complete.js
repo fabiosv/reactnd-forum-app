@@ -114,7 +114,14 @@ export const addComment = (comment_data) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ comment_data })
+    body: JSON.stringify({
+      id: generateID(),
+      timestamp: comment_data.timestamp,
+      body: comment_data.body,
+      author: comment_data.author,
+      parentId: comment_data.parentId
+
+    })
   }).then(res => res.json())
 
 export const getComment = (comment_id) =>

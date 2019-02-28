@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import './categories.css'
 import {selectCategory} from '../../actions/categories'
+import { withRouter, Link } from 'react-router-dom'
 
 class Categories extends Component {
   // removeItem = (todo) => {
@@ -19,17 +20,23 @@ class Categories extends Component {
         <h4>Categories</h4>
         <ul>
           <li className='col-12'>
-            <button
+            {/* <button
               className={selectedCategory === 'all' ? 'button active' : 'button'}
               onClick={(e) => this.changeSelection('all')}
-            >All Posts</button>
+            >All Posts</button> */}
+            <a className={selectedCategory === 'all' ? 'btn button active' : 'btn button'}
+              href="/">All Posts</a>
           </li>
           {categories.map((category) => (
             <li className='col-12' key={category.path}>
-              <button
+              {/* <button
                 className={selectedCategory === category.name ? 'button active' : 'button'}
                 onClick={(e) => this.changeSelection(category.name)}
-              >{category.name}</button>
+              >{category.name}</button> */}
+              <a
+                className={selectedCategory === category.name ? 'btn button active' : 'btn button'}
+                href={`/${category.name}`}
+              >{category.name}</a>
             </li>
           ))}
         </ul>

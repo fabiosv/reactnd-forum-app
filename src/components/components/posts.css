@@ -1,10 +1,10 @@
-#posts {
+#posts, #comments {
   background-color: lightgray;
   padding-bottom: 10px;
   padding-top: 10px;
 }
 
-#add-post, #update-post {
+#add-add-post-comment, #update-post {
   padding-right: 10px;
   color: #343a40;
 }

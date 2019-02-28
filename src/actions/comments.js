@@ -53,13 +53,15 @@ function deleteComment (comment) {
 
 
 
-export function handleAddComment () {
+export function handleAddComment (comment, sucs_calb_fn, err_calb_fn) {
   return (dispatch) => {
-    return API.add_comment()
-      .then((comment) => {
-
+    dispatch(addComment(comment))
+    return API.add_comment(comment)
+      .then(() => sucs_calb_fn())
+      .catch(() => {
+        console.log('There was an error adding new comment. Try again.')
+        err_calb_fn()
       })
-      .catch(() => alert('There was an error adding new comment. Try again.'))
   }
 }
 

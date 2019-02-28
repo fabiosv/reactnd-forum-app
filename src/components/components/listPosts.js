@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import PostCard from './postCard'
 import {handlePostScoredUp, handlePostScoredDown, handleDeletePost} from '../../actions/posts'
-import { FaPlus, FaFilter } from "react-icons/fa"
+import Tools from './tools'
 // import { Link } from 'react-router-dom' //for some reason, this is changing URL path but not rendering component
 
 class ListPosts extends Component {
@@ -37,23 +37,13 @@ class ListPosts extends Component {
   }
   render() {
     const {posts, selectedCategory} = this.props;
-    const filtred_posts = selectedCategory === 'all' ? posts : posts.filter((post) => post.category === selectedCategory)
+    // console.log(posts.length);
+    // const filtred_posts = selectedCategory === 'all' ? posts : posts.filter((post) => post.category === selectedCategory)
     return(
       <div id='posts' className='offset-sm-3 col-8'>
-        <span className='tools'>
-          <a href="/post/create-update/new"
-            id='add-post'
-            title='Add New Post'
-            alt='Button to Add New Post'><FaPlus/></a>
-
-          <a id='filter-posts'
-            title={this.state.sortByDate ? 'Sort By High Score' : 'Sort By Date'}
-            onClick={(e) => this.alterSortType()}
-            alt='Button to Alter Filter to Score/Date'><FaFilter/></a>
-        </span>
-
+        <Tools sortByDate={this.state.sortByDate} alterSortType={this.alterSortType}/>
         <h4>Posts</h4>
-        {filtred_posts.sort(this.sort).map((post) => (
+        {posts.sort(this.sort).map((post) => (
           <PostCard
             key={post.id}
             post={post}
