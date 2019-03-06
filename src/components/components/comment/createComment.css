@@ -1,0 +1,18 @@
+.editCard.activate {
+  transform: rotateX(0deg);
+  /* display: block; */
+  overflow: hidden;
+  height: 128px;
+  /* transition-property: all; */
+  /* transition-duration: 1s; */
+}
+.editCard {
+  transition-property: all;
+  transition-duration: 1s;
+  transform: rotateX(-90deg);
+  transform-origin: top;
+  /* display: none; */
+  height: 0;
+  overflow: hidden;
+  /* position: absolute; */
+}

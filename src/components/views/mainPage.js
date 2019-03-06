@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import './mainPage.css'
 import { withRouter } from 'react-router-dom'
-import ConnectedCategories from '../components/categories'
-import ConnectedListPosts from '../components/listPosts'
-import Loader from '../components/loader'
-import Header from '../components/header'
+import ConnectedCategories from '../components/categories/categories'
+import ConnectedPostsContainer from '../components/post/postsContainer'
+import Loader from '../components/commons/loader'
+import Header from '../components/commons/header'
 import {
   handleInitialData
 } from '../../actions/shared'
@@ -13,33 +13,30 @@ import {
 class MainPage extends Component {
   state = {}
 
-  onScoreUp = (post_id) => {
-    console.log(`${post_id}: 'upVote'`)
-  }
-
-  onScoreDown = (post_id) => {
-    console.log(`${post_id}: 'downVote'`)
-  }
-
   componentDidMount () {
     const { category } = this.props.match.params
     const { dispatch } = this.props
     console.log(category)
     dispatch(handleInitialData(category))
+    this.forceUpdate()
   }
 
   render(){
     return(
       <div>
-        <Header title={"Leitura"} showIcon={true}/>
+        <Header title={"Leitura"} showIcon={true} goBackButton={false}/>
         <Loader loading={this.props.loading}/>
         <ConnectedCategories />
-        <ConnectedListPosts />
+        <ConnectedPostsContainer />
       </div>
     )
   }
 }
 
-export default withRouter(connect((state) => ({
+export default connect((state) => ({
   loading: state.loading,
-}))(MainPage))
+}))(MainPage)
+
+// export default withRouter(connect((state) => ({
+//   loading: state.loading,
+// }))(MainPage))

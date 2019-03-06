@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import * as Alert from '../../../utils/alertController'
 import PostCard from './postCard'
-import {handlePostScoredUp, handlePostScoredDown, handleDeletePost} from '../../actions/posts'
-import { FaPlus, FaFilter } from "react-icons/fa"
+import {handlePostScoredUp, handlePostScoredDown, handleDeletePost} from '../../../actions/posts'
+import Tools from '../commons/tools'
 // import { Link } from 'react-router-dom' //for some reason, this is changing URL path but not rendering component
 
-class ListPosts extends Component {
+class PostsContainer extends Component {
   state = {
     sortByDate: false,
   }
@@ -19,7 +20,15 @@ class ListPosts extends Component {
   }
 
   onDelete = (post) => {
-    this.props.dispatch(handleDeletePost(post))
+    Alert.showConfirmAlert("You won't be able to revert this!")
+    .then((result) => {
+      if(result.value) {
+        this.props.dispatch(handleDeletePost(
+          post,
+          () => { Alert.showAlert("Post Deleted!", true) }
+        ))
+      }
+    })
   }
 
   alterSortType = () => {
@@ -36,24 +45,18 @@ class ListPosts extends Component {
     }
   }
   render() {
-    const {posts, selectedCategory} = this.props;
-    const filtred_posts = selectedCategory === 'all' ? posts : posts.filter((post) => post.category === selectedCategory)
+    const {posts} = this.props;
     return(
-      <div id='posts' className='offset-sm-3 col-8'>
-        <span className='tools'>
-          <a href="/post/create-update/new"
-            id='add-post'
-            title='Add New Post'
-            alt='Button to Add New Post'><FaPlus/></a>
-
-          <a id='filter-posts'
-            title={this.state.sortByDate ? 'Sort By High Score' : 'Sort By Date'}
-            onClick={(e) => this.alterSortType()}
-            alt='Button to Alter Filter to Score/Date'><FaFilter/></a>
-        </span>
-
+      <div id="posts" className="offset-sm-3 col-8">
+        <Tools
+          sortByDate={this.state.sortByDate}
+          isActionLink={true}
+          goTo="/post/create-update/new"
+          onClickAction={() => {}}
+          addTitle="Add New Post"
+          alterSortType={this.alterSortType}/>
         <h4>Posts</h4>
-        {filtred_posts.sort(this.sort).map((post) => (
+        {posts.sort(this.sort).map((post) => (
           <PostCard
             key={post.id}
             post={post}
@@ -69,4 +72,4 @@ class ListPosts extends Component {
 export default connect((state) => ({
   posts: state.posts,
   selectedCategory: state.selectedCategory,
-}))(ListPosts)
+}))(PostsContainer)

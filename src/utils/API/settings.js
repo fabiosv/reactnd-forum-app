@@ -9,3 +9,7 @@ export const headers = {
   'Accept': 'application/json',
   'Authorization': token
 }
+
+export const generateID = () => {
+  return Math.random().toString(36).substr(2, 9)
+}
