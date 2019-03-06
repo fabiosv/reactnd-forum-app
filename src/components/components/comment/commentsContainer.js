@@ -12,7 +12,7 @@ import {
 import Tools from '../commons/tools'
 // import { Link } from 'react-router-dom' //for some reason, this is changing URL path but not rendering component
 
-class CommentList extends Component {
+class CommentsContainer extends Component {
   state ={
     sortByDate: false,
     addCommentActive: false,
@@ -117,4 +117,4 @@ class CommentList extends Component {
 export default connect((state, own_params) => ({
   comments: state.comments,
   parentID: own_params.parentID,
-}))(CommentList)
+}))(CommentsContainer)

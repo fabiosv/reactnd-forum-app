@@ -8,7 +8,7 @@ import {handleReceivePostInfo} from "../../actions/posts"
 import {handleFetchPostComments} from "../../actions/comments"
 import Header from "../components/commons/header"
 import Loader from "../components/commons/loader"
-import ConnectedCommentList from "../components/comment/commentList"
+import ConnectedCommentsContainer from "../components/comment/commentsContainer"
 
 
 class PostDetail extends Component {
@@ -75,7 +75,7 @@ class PostDetail extends Component {
                 onScoreUp={this.onScoreUp}
                 onScoreDown={this.onScoreDown}
                 onDelete={this.onDelete}/>
-              <ConnectedCommentList parentID={id} category={category}/>
+              <ConnectedCommentsContainer parentID={id} category={category}/>
             </div>
           )))
         }
