@@ -1,6 +1,6 @@
-import { API_HOST, headers } from '../settings'
+import { API_HOST, headers } from './settings'
 
-export const get_categories = () =>
+export const fetchCategories = () =>
   fetch(`${API_HOST}/categories`, { headers })
     .then(res => res.json())
     .then(data => data)

@@ -6,18 +6,21 @@ import {handleReceiveCategories} from '../../actions/categories'
 import './managePost.css'
 import Loader from '../components/commons/loader'
 import Header from '../components/commons/header'
-import * as Alert from '../../utils/alertController'
+import Swal from 'sweetalert2'
 // import withReactContent from 'sweetalert2-react-content'
 
-class ManagePost extends Component {
+class ManageComment extends Component {
   state = {
     posts: {
       author: "",
       body: "",
-      category: "react",
+      category: "",
+      commentCount: 0,
+      deleted: false,
       id: "",
       timestamp: Date.now(),
       title: "",
+      voteScore: 0,
     },
     categories: [],
     modeCreation: true,
@@ -40,17 +43,20 @@ class ManagePost extends Component {
   }
 
   componentDidUpdate(prevState, prevProps){
-    if(this.props.posts.length > 0 && this.id !== 'new'){
-      if(this.props.posts[0].id === this.id && this.state.posts.id !== this.id){
-        let {posts} = this.props
-        posts = posts[0]
+    if(typeof(this.props.posts.id) === 'string' && this.id !== 'new'){
+      if(this.props.posts.id === this.id && this.state.posts.id !== this.id){
+        const {posts} = this.props
         this.setState((currentState) => ({
           posts: {
             author: posts.author,
             body: posts.body,
             category: posts.category,
+            commentCount: posts.commentCount,
+            deleted: posts.deleted,
             id: posts.id,
+            timestamp: posts.timestamp,
             title: posts.title,
+            voteScore: posts.voteScore,
           },
           categories: [{name: posts.category}],
         }))
@@ -76,32 +82,45 @@ class ManagePost extends Component {
 
   save = (event) => {
     event.preventDefault()
+    console.log('saving')
     if(this.id === 'new') {
       this.props.dispatch(handleAddPost(
         this.state.posts,
         () => {
-          Alert.showAlert('Post Saved!', true)
-          this.props.history.push("/")
+          this.showAlert('Post Saved!', true)
+          this.setState((currentState) => ({
+            toHome: true
+          }))
         },
-        () => { Alert.showAlert('Ops! Something went wrong, please try again', false) }
+        () => {this.showAlert('Ops! Something went wrong, please try again', false)}
       ))
     } else {
       this.props.dispatch(handleUpdatePost(
         this.state.posts,
-        () => {Alert.showAlert('Post Edited!', true)},
-        () => {Alert.showAlert('Ops! Something went wrong, please try again', false)}
+        () => {this.showAlert('Post Edited!', true)},
+        () => {this.showAlert('Ops! Something went wrong, please try again', false)}
       ))
     }
+  }
+
+  showAlert = (message, sucess=true) => {
+    Swal.fire({
+      type: sucess ? 'success' : 'error',
+      text: message,
+      showConfirmButton: false,
+      timer: 3000
+    });
   }
 
   render(){
     const {id} = this.props.match.params;
     const { loading } = this.state.modeCreation ? this.state : this.props;
     const {posts, categories, toHome} = this.state;
-    // if(toHome) {return <Redirect to="/" />}
+    if(toHome) {return <Redirect to="/" />}
     return(
       <div>
-        <Header title={this.state.modeCreation ? "New Post" : "Edit Post"} goBackButton={true} />
+        <Header title={this.state.modeCreation ? "New Comment" : "Edit Comment"} goBackButton={true} />
+        <p>{id}</p>
         <Loader loading={loading}/>
         <form className="offset-md-2 col-md-8">
           <input className="col-md-4 col-sm-10"
@@ -109,6 +128,11 @@ class ManagePost extends Component {
             disabled={!this.state.modeCreation}
             onChange={(event) => this.handleText('author', event.target.value)}
             value={posts.author} />
+          {/* <input className="col-md-4 col-sm-10 offset-md-1"
+            placeholder="Category"
+            disabled={!this.state.modeCreation}
+            onChange={(event) => this.handleText('category', event.target.value)}
+            value={posts.category} /> */}
           <select className="col-md-4 col-sm-10 offset-md-1"
             placeholder="Category"
             disabled={!this.state.modeCreation}
@@ -141,4 +165,4 @@ export default connect((state) => ({
   posts: state.posts,
   loading: state.loading,
   categories: state.categories,
-}))(ManagePost)
+}))(ManageComment)

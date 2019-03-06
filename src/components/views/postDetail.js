@@ -1,22 +1,18 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import PostCard from '../components/postCard'
-import CommentCard from '../components/commentCard'
-import {handleReceivePostInfo} from '../../actions/posts'
-import {handleFetchPostComments} from '../../actions/comments'
-import Header from '../components/header'
-import Tools from '../components/tools'
-import Loader from '../components/loader'
-import CreateComment from '../components/comment/createComment'
+import React, { Component } from "react"
+import {connect} from "react-redux"
+import { withRouter } from "react-router-dom"
+import * as Alert from "../../utils/alertController"
+import PostCard from "../components/post/postCard"
+import {handlePostScoredUp, handlePostScoredDown, handleDeletePost} from "../../actions/posts"
+import {handleReceivePostInfo} from "../../actions/posts"
+import {handleFetchPostComments} from "../../actions/comments"
+import Header from "../components/commons/header"
+import Loader from "../components/commons/loader"
+import ConnectedCommentList from "../components/comment/commentList"
 
 
 class PostDetail extends Component {
-  state ={
-    comment: "",
-    sortByDate: false,
-    modalIsOpen: false,
-  }
+  state ={}
 
   componentDidMount(){
     const {dispatch} = this.props
@@ -25,52 +21,77 @@ class PostDetail extends Component {
     dispatch(handleFetchPostComments(id))
   }
 
-  alterSortType = () => {
-    this.setState((currentState) => ({
-      sortByDate: !currentState.sortByDate,
-    }))
+  onScoreUp = (post_id) => {
+    this.props.dispatch(handlePostScoredUp(post_id))
   }
 
-  sort = (a,b) => {
-    if (this.state.sortByDate) {
-      return (b.timestamp - a.timestamp)
-    } else {
-      return (b.voteScore - a.voteScore)
+  onScoreDown = (post_id) => {
+    this.props.dispatch(handlePostScoredDown(post_id))
+  }
+
+  onDelete = (post) => {
+    Alert.showConfirmAlert("You won't be able to revert this! T.T")
+    .then((result) => {
+      if(result.value) {
+        this.props.dispatch(handleDeletePost(
+          post,
+          () => {
+            Alert.showAlert("Post Deleted!", true)
+            this.props.history.push("/")
+
+            // this.props.history.goBack()
+          }
+        ))
+      }
+    })
+  }
+
+  isPostFounded = () => {
+    const { posts } = this.props;
+    const { category } = this.props.match.params;
+    console.log(posts)
+    if(posts.length > 0) {
+      return posts[0].category === category
     }
+    return false
   }
 
   render(){
-    const { posts, comments, loading } = this.props;
-    const { category } = this.props.match.params;
+    const { posts, loading } = this.props;
+    const { id, category } = this.props.match.params;
+    console.log(posts)
     return(
       <div>
         <Header title={"Post Details"} goBackButton={true} />
         <Loader loading={loading}/>
-        {posts.category !== category && !loading
+        {!loading && !this.isPostFounded()
           ? (
             <div>404 Post Not Found :(</div>
           )
-          : (<div className="col-md-8 offset-md-2">
-            <PostCard post={posts}/>
-            <div id="comments" className="col-md-10 offset-md-1">
-              <Tools sortByDate={this.state.sortByDate} alterSortType={this.alterSortType}/>
-              <h3>Comments</h3>
-              <ul>
-                <li><CreateComment/></li>
-                {comments.sort(this.sort).map((comment) => (
-                  <li key={comment.id}><CommentCard comment={comment}/></li>
-                ))}
-              </ul>
+          : (posts.map((post) => (
+            <div className="col-md-8 offset-md-2" key={post.id}>
+              <PostCard
+                post={post}
+                onScoreUp={this.onScoreUp}
+                onScoreDown={this.onScoreDown}
+                onDelete={this.onDelete}/>
+              <ConnectedCommentList parentID={id} category={category}/>
             </div>
-          </div>)
+          )))
         }
       </div>
     )
   }
 }
 
-export default withRouter(connect((state) => ({
+export default connect((state) => ({
   posts: state.posts,
-  loading: state.loading,
-  comments: state.comments
-}))(PostDetail))
+  comments: state.comments,
+  loading: state.loading
+}))(PostDetail)
+
+// export default withRouter(connect((state) => ({
+//   posts: state.posts,
+//   comments: state.comments,
+//   loading: state.loading
+// }))(PostDetail))

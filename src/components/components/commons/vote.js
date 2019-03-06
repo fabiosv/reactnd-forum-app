@@ -1,6 +1,6 @@
 import React from 'react'
 // import {connect} from 'react-redux'
-import './posts.css'
+import '../post/posts.css'
 import {string, func} from 'prop-types'
 import { FaRegFrownOpen, FaRegGrinHearts } from 'react-icons/fa'
 

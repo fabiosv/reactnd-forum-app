@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import Swal from 'sweetalert2'
 import { IoMdCreate, IoMdTrash, IoIosContact } from "react-icons/io"
-import Vote from './vote'
+import Vote from '../commons/vote'
 
 class CommentCard extends Component {
   onScoreUp = () => {
@@ -15,13 +16,36 @@ class CommentCard extends Component {
     console.log(`${comment_id}: 'downVote'`)
   }
 
+  onUpdate = (comment) => {
+    Swal.fire({
+      title: 'Update Comment',
+      html:
+        `<textarea id="swal-body" class="swal2-textarea" placeholder="comment">${comment.body}</textarea>`,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonColor: '#3085D6',
+      cancelButtonColor: '#D33',
+      preConfirm: () => {
+        return {
+          timestamp: Date.now(),
+          body: document.getElementById('swal-body').value
+        }
+      }
+    }).then((result) => {
+      if(result.value) {
+        console.log(result.value)
+        this.props.onUpdate(comment, result.value)
+      }
+    })
+  }
+
   render(){
-    const {comment} = this.props
+    const {comment, onDelete} = this.props
     return(
       <div className='card post shadow'>
         <div className='tools'>
-          <button className="button2" ><IoMdCreate /></button>
-          <button className="button2"><IoMdTrash /></button>
+          <button className="button2" onClick={(e) => this.onUpdate(comment)}><IoMdCreate /></button>
+          <button className="button2" onClick={(e) => onDelete(comment)}><IoMdTrash /></button>
         </div>
         <div style={{
             top: '10%',

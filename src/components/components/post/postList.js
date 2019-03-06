@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import * as Alert from '../../../utils/alertController'
 import PostCard from './postCard'
-import {handlePostScoredUp, handlePostScoredDown, handleDeletePost} from '../../actions/posts'
-import Tools from './tools'
+import {handlePostScoredUp, handlePostScoredDown, handleDeletePost} from '../../../actions/posts'
+import Tools from '../commons/tools'
 // import { Link } from 'react-router-dom' //for some reason, this is changing URL path but not rendering component
 
-class ListPosts extends Component {
+class PostList extends Component {
   state = {
     sortByDate: false,
   }
@@ -19,7 +20,15 @@ class ListPosts extends Component {
   }
 
   onDelete = (post) => {
-    this.props.dispatch(handleDeletePost(post))
+    Alert.showConfirmAlert("You won't be able to revert this!")
+    .then((result) => {
+      if(result.value) {
+        this.props.dispatch(handleDeletePost(
+          post,
+          () => { Alert.showAlert("Post Deleted!", true) }
+        ))
+      }
+    })
   }
 
   alterSortType = () => {
@@ -40,8 +49,12 @@ class ListPosts extends Component {
     // console.log(posts.length);
     // const filtred_posts = selectedCategory === 'all' ? posts : posts.filter((post) => post.category === selectedCategory)
     return(
-      <div id='posts' className='offset-sm-3 col-8'>
-        <Tools sortByDate={this.state.sortByDate} alterSortType={this.alterSortType}/>
+      <div id="posts" className="offset-sm-3 col-8">
+        <Tools
+          sortByDate={this.state.sortByDate}
+          goTo="/post/create-update/new"
+          addTitle="Add New Post"
+          alterSortType={this.alterSortType}/>
         <h4>Posts</h4>
         {posts.sort(this.sort).map((post) => (
           <PostCard
@@ -59,4 +72,4 @@ class ListPosts extends Component {
 export default connect((state) => ({
   posts: state.posts,
   selectedCategory: state.selectedCategory,
-}))(ListPosts)
+}))(PostList)

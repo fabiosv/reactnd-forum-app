@@ -1,4 +1,4 @@
-.editCard:hover {
+.editCard.activate {
   transform: rotateX(0deg);
   /* display: block; */
   overflow: hidden;

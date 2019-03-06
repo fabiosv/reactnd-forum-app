@@ -6,7 +6,7 @@
 
 #add-add-post-comment, #update-post {
   padding-right: 10px;
-  color: #343a40;
+  color: #343A40;
 }
 
 .tools {
@@ -48,11 +48,11 @@
 }
 
 .post a {
-  color: #4d4dff;
+  color: #4D4DFF;
   text-decoration: none;
   transition: .25s ease;
   &:hover {
-    border-color: #ff4d4d;
-    color: #ff4d4d;
+    border-color: #FF4D4D;
+    color: #FF4D4D;
   }
 }

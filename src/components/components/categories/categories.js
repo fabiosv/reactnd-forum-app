@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import './categories.css'
-import {selectCategory} from '../../actions/categories'
+import {selectCategory} from '../../../actions/categories'
 import { withRouter, Link } from 'react-router-dom'
 
 class Categories extends Component {

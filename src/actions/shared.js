@@ -1,4 +1,4 @@
-import * as API from '../utils/API_Complete'
+import * as API from '../utils/API/shared'
 import {receiveCategories, selectCategory} from './categories'
 import {receivePosts} from './posts'
 

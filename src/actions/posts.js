@@ -1,4 +1,4 @@
-import * as API from '../utils/API_Complete'
+import * as API from '../utils/API/posts'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST_INFO = 'RECEIVE_POST_INFO'
@@ -65,7 +65,7 @@ export function handleAddPost(post, sucs_calb_fn, err_calb_fn) {
   return (dispatch) => {
     return API.addNewPost(post)
       .then((p) => {
-        dispatch(addPost(post))
+        dispatch(addPost([p]))
         sucs_calb_fn()
       })
       .catch((error) =>{
@@ -89,10 +89,13 @@ export function handleUpdatePost(post, sucs_calb_fn, err_calb_fn) {
   }
 }
 
-export function handleDeletePost(post) {
+export function handleDeletePost(post, sucs_calb_fn) {
   return (dispatch) => {
     return API.deletePost(post.id)
-      .then((p) => dispatch(deletePost(post)))
+      .then((p) => {
+        dispatch(deletePost(post))
+        sucs_calb_fn()
+      })
       .catch((error) =>{
         console.log(`Post ID: ${post.id} not deleted!`)
       })
@@ -102,7 +105,7 @@ export function handleDeletePost(post) {
 export function handleReceivePostInfo(post_id) {
   return (dispatch) => {
     return API.getPost(post_id)
-      .then((post) => dispatch(receivePostInfo(post)))
+      .then((post) => dispatch(receivePostInfo([post])))
       .catch((error) =>{
         console.log(`Post ID: ${post_id} not found`)
       })
@@ -114,7 +117,7 @@ export function handlePostScoredUp(post_id, err_calb_fn){
     dispatch(postScoredUp(post_id))
     return API.voteOnPost(post_id, 'upVote')
       .catch(() => {
-        alert('There was an error on voting. Please Try again.')
+        console.log('There was an error on voting. Please Try again.')
         err_calb_fn()
         dispatch(postScoredDown(post_id))
       })
@@ -126,7 +129,7 @@ export function handlePostScoredDown(post_id, err_calb_fn){
     dispatch(postScoredDown(post_id))
     return API.voteOnPost(post_id, 'downVote')
       .catch(() => {
-        alert('There was an error on voting. Please Try again.')
+        console.log('There was an error on voting. Please Try again.')
         err_calb_fn()
         dispatch(postScoredUp(post_id))
       })
