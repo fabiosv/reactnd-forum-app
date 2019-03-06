@@ -2,16 +2,6 @@ import * as API from '../utils/API/shared'
 import {receiveCategories, selectCategory} from './categories'
 import {receivePosts} from './posts'
 
-// export const RECEIVE_DATA = 'RECEIVE_DATA'
-
-// function receiveData (categories, posts) {
-//   return {
-//     type: RECEIVE_DATA,
-//     categories,
-//     posts
-//   }
-// }
-
 export function handleInitialData (category) {
   if(typeof(category) === "undefined") {category = "all"}
   return (dispatch) => {

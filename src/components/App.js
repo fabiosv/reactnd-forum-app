@@ -11,9 +11,6 @@ class App extends Component {
   getState = () => {
     console.log(this.store.getState())
   }
-  // componentWillUnmount(){
-  //   this.unsubscribe()
-  // }
 
   render() {
     return (

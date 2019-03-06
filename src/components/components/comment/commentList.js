@@ -48,14 +48,6 @@ class CommentList extends Component {
     ))
   }
 
-  // componentDidMount(){
-  //   const {dispatch} = this.props
-  //   const {id} = this.props
-  //   typeof(id) === 'undefined'
-  //   ? this.forceUpdate()
-  //   : dispatch(handleFetchPostComments(id))
-  // }
-
   alterSortType = () => {
     this.setState((currentState) => ({
       sortByDate: !currentState.sortByDate,

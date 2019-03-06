@@ -4,7 +4,6 @@ import '../../views/mainPage.css'
 
 function Tools (props) {
   const { goTo, onClickAction, addTitle } = props;
-  // "/post/create-update/new"
   return(
     <span className="tools">
       {typeof(goTo) === "undefined"

@@ -7,7 +7,6 @@ import './managePost.css'
 import Loader from '../components/commons/loader'
 import Header from '../components/commons/header'
 import * as Alert from '../../utils/alertController'
-// import withReactContent from 'sweetalert2-react-content'
 
 class ManagePost extends Component {
   state = {

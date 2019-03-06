@@ -45,9 +45,7 @@ class PostList extends Component {
     }
   }
   render() {
-    const {posts, selectedCategory} = this.props;
-    // console.log(posts.length);
-    // const filtred_posts = selectedCategory === 'all' ? posts : posts.filter((post) => post.category === selectedCategory)
+    const {posts} = this.props;
     return(
       <div id="posts" className="offset-sm-3 col-8">
         <Tools

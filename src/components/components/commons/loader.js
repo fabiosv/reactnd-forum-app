@@ -1,6 +1,4 @@
-// import {css} from '@emotion/core'
 import {PacmanLoader} from 'react-spinners'
-// import PacmanLoader from 'react-spinners/PacmanLoader'
 import React from 'react'
 import './loader.css'
 
