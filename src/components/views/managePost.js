@@ -100,7 +100,7 @@ class ManagePost extends Component {
     // if(toHome) {return <Redirect to="/" />}
     return(
       <div>
-        <Header title={this.state.modeCreation ? "New Post" : "Edit Post"} goBackButton={true} />
+        <Header title={this.state.modeCreation ? "New Post" : "Edit Post"} goBackButton={true} showIcon={false}/>
         <Loader loading={loading}/>
         <form className="offset-md-2 col-md-8">
           <input className="col-md-4 col-sm-10"
