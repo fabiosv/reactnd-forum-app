@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './mainPage.css'
 import { withRouter } from 'react-router-dom'
 import ConnectedCategories from '../components/categories/categories'
-import ConnectedPostList from '../components/post/postList'
+import ConnectedPostsContainer from '../components/post/postsContainer'
 import Loader from '../components/commons/loader'
 import Header from '../components/commons/header'
 import {
@@ -27,7 +27,7 @@ class MainPage extends Component {
         <Header title={"Leitura"} showIcon={true} goBackButton={false}/>
         <Loader loading={this.props.loading}/>
         <ConnectedCategories />
-        <ConnectedPostList />
+        <ConnectedPostsContainer />
       </div>
     )
   }
