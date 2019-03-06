@@ -31,6 +31,20 @@ export const fetchPosts = () =>
     .then(res => res.json())
     .then(data => data)
 
+export const getInitialData = (category) => {
+  if(category === "all") {
+    return Promise.all([
+      fetchCategories(),
+      fetchPosts()
+    ])
+  } else {
+    return Promise.all([
+      fetchCategories(),
+      getCategoryPosts(category)
+    ])
+  }
+}
+
 export const addNewPost = (post) =>
   fetch(`${api}/posts`, {
       method: 'POST',

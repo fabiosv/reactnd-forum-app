@@ -17,12 +17,12 @@ li button {
   border: 1px solid #555;
 }
 
-li button.active {
+li a.active {
   background-color: var(--active-background-color);
   color: white;
 }
 
-li button:hover:not(.active) {
+li a:hover:not(.active) {
   background-color: #555;
   color: white;
 }

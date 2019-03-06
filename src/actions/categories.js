@@ -1,3 +1,4 @@
+import * as API from '../utils/API/categories'
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 
@@ -8,9 +9,20 @@ export function receiveCategories(categories) {
   }
 }
 
-export function selectCategory(category_name){
+export function selectCategory(selectedCategory){
+  console.log(`Action value: ${selectedCategory}`)
   return{
     type: SELECT_CATEGORY,
-    name: category_name
+    name: selectedCategory
+  }
+}
+
+export function handleReceiveCategories() {
+  return (dispatch) => {
+    return API.get_categories()
+      .then((categories) => dispatch(receiveCategories(categories)))
+      .catch((error) =>{
+        console.log(`Post ID: ${error} not found`)
+      })
   }
 }

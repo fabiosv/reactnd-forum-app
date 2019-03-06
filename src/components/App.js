@@ -19,6 +19,7 @@ class App extends Component {
     return (
       <div className="App">
         <Route exact path='/' component={ConnectedMainPage} />
+        <Route exact path='/:category' component={ConnectedMainPage} />
         <Route path='/post/create-update/:id' component={ConnectedManagePost}/>
         <Route path='/post/detail/:id' component={ConnectedPostDetail}/>
         <Route path='/demo' component={Demo} />
