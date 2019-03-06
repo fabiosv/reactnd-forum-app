@@ -79,15 +79,18 @@ class ManagePost extends Component {
       this.props.dispatch(handleAddPost(
         this.state.posts,
         () => {
-          Alert.showAlert('Post Saved!', true)
-          this.props.history.push("/")
+          Alert.showAlert('Post Saved!', true, true)
+          // this.props.history.push("/") //not working :(
+          this.setState((currentState) => ({
+            toHome: true,
+          }))
         },
         () => { Alert.showAlert('Ops! Something went wrong, please try again', false) }
       ))
     } else {
       this.props.dispatch(handleUpdatePost(
         this.state.posts,
-        () => {Alert.showAlert('Post Edited!', true)},
+        () => {Alert.showAlert('Post Edited!', true, true)},
         () => {Alert.showAlert('Ops! Something went wrong, please try again', false)}
       ))
     }
@@ -97,7 +100,9 @@ class ManagePost extends Component {
     const {id} = this.props.match.params;
     const { loading } = this.state.modeCreation ? this.state : this.props;
     const {posts, categories, toHome} = this.state;
-    // if(toHome) {return <Redirect to="/" />}
+    if(toHome) {
+      return <Redirect to="/" />
+    }
     return(
       <div>
         <Header title={this.state.modeCreation ? "New Post" : "Edit Post"} goBackButton={true} showIcon={false}/>
