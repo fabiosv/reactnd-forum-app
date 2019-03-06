@@ -1,8 +1,16 @@
 import React, { Component } from "react"
+import {object, func} from 'prop-types'
 import { IoMdCreate, IoMdTrash, IoIosContact } from "react-icons/io"
 import { FaComments } from "react-icons/fa"
 import Vote from "../commons/vote"
 class PostCard extends Component {
+  static propTypes = {
+    onDelete: func.isRequired,
+    onScoreUp: func.isRequired,
+    onScoreDown: func.isRequired,
+    post: object.isRequired,
+  }
+
   onScoreUp = () => {
     const post_id = this.props.post.id;
     this.props.onScoreUp(post_id)

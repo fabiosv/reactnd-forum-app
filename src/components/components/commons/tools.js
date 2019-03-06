@@ -1,13 +1,23 @@
 import React from 'react'
+import {bool, string, func} from 'prop-types'
 import {FaPlus, FaFilter} from 'react-icons/fa'
 import '../../views/mainPage.css'
 
 function Tools (props) {
-  const { goTo, onClickAction, addTitle } = props;
+  const { isActionLink, goTo, onClickAction, addTitle } = props;
   return(
     <span className="tools">
-      {typeof(goTo) === "undefined"
+      {isActionLink
         ? (
+          <a href={goTo}
+            id="add-post-comment"
+            title={addTitle}
+            style={{
+              paddingRight: "10px",
+              color: "#343a40",
+            }}
+            alt={`Button to ${addTitle}`}><FaPlus/></a>
+        ) : (
           <button
             onClick={(e) => onClickAction()}
             id="add-post-comment"
@@ -18,15 +28,6 @@ function Tools (props) {
               color: "#343a40",
             }}
             alt={`Button to ${addTitle}`}><FaPlus/></button>
-        ) : (
-          <a href={goTo}
-            id="add-post-comment"
-            title={addTitle}
-            style={{
-              paddingRight: "10px",
-              color: "#343a40",
-            }}
-            alt={`Button to ${addTitle}`}><FaPlus/></a>
         )
       }
 
@@ -38,6 +39,15 @@ function Tools (props) {
       <p style={{display: "inline"}}>{props.sortByDate ? "By: Date" : "By: Score"}</p>
     </span>
   )
+}
+
+Tools.propTypes = {
+  sortByDate: bool.isRequired,
+  goTo: string.isRequired,
+  isActionLink: bool.isRequired,
+  addTitle: string.isRequired,
+  alterSortType: func.isRequired,
+  onClickAction: func.isRequired,
 }
 
 export default Tools

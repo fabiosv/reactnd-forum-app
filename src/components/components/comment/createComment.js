@@ -1,7 +1,14 @@
 import React, {Component} from 'react'
+import {string, bool, func} from 'prop-types'
 import './createComment.css'
 
 class CreateComment extends Component {
+  static propTypes = {
+    parentID: string.isRequired,
+    activate: bool.isRequired,
+    onPublish: func.isRequired,
+  }
+
   state = {
     id: "",
     body: "",

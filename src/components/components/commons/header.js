@@ -1,4 +1,5 @@
 import React from 'react'
+import {bool} from 'prop-types'
 import {FaBookDead, FaArrowLeft} from 'react-icons/fa'
 
 function Header (props) {
@@ -13,6 +14,11 @@ function Header (props) {
       </h2>
     </div>
   )
+}
+
+Header.propTypes = {
+  showIcon: bool.isRequired,
+  goBackButton: bool.isRequired,
 }
 
 export default Header

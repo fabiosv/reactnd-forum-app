@@ -1,5 +1,6 @@
-import {PacmanLoader} from 'react-spinners'
 import React from 'react'
+import {bool} from 'prop-types'
+import {PacmanLoader} from 'react-spinners'
 import './loader.css'
 
 function Loader (props) {
@@ -20,6 +21,10 @@ function Loader (props) {
       />
     </div>
   )
+}
+
+Loader.propTypes = {
+  loading: bool.isRequired,
 }
 
 export default Loader

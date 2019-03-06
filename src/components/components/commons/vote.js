@@ -1,18 +1,9 @@
 import React from 'react'
-// import {connect} from 'react-redux'
 import '../post/posts.css'
-import {string, func} from 'prop-types'
+import {number, func} from 'prop-types'
 import { FaRegFrownOpen, FaRegGrinHearts } from 'react-icons/fa'
 
 function Vote (props) {
-  // static propTypes = {
-    // voteScore: string.isRequired,
-  //   onScoreUp: func.isRequired,
-  //   onScoreDown: func.isRequired,
-  // }
-  // removeItem = (todo) => {
-  //   this.props.dispatch(handleDeleteTodo(todo))
-  // }
   const {voteScore, onScoreUp, onScoreDown} = props;
   return(
     <span className='vote'>
@@ -21,6 +12,12 @@ function Vote (props) {
       <button className="button2" onClick={onScoreDown}><FaRegFrownOpen></FaRegFrownOpen></button>
     </span>
   )
+}
+
+Vote.propTypes = {
+  voteScore: number.isRequired,
+  onScoreUp: func.isRequired,
+  onScoreDown: func.isRequired,
 }
 
 export default Vote

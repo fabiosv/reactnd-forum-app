@@ -50,7 +50,9 @@ class PostList extends Component {
       <div id="posts" className="offset-sm-3 col-8">
         <Tools
           sortByDate={this.state.sortByDate}
+          isActionLink={true}
           goTo="/post/create-update/new"
+          onClickAction={() => {}}
           addTitle="Add New Post"
           alterSortType={this.alterSortType}/>
         <h4>Posts</h4>

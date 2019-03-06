@@ -62,7 +62,7 @@ class PostDetail extends Component {
     console.log(posts)
     return(
       <div>
-        <Header title={"Post Details"} goBackButton={true} />
+        <Header title={"Post Details"} goBackButton={true} showIcon={false} />
         <Loader loading={loading}/>
         {!loading && !this.isPostFounded()
           ? (

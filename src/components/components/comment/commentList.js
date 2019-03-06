@@ -87,6 +87,9 @@ class CommentList extends Component {
     return(
       <div id="comments" className="col-md-10 offset-md-1">
         <Tools
+          addTitle="Add new Comment"
+          isActionLink={false}
+          goTo=""
           onClickAction={this.toggleNewComment}
           sortByDate={this.state.sortByDate}
           alterSortType={this.alterSortType}/>

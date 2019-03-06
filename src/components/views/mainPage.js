@@ -24,7 +24,7 @@ class MainPage extends Component {
   render(){
     return(
       <div>
-        <Header title={"Leitura"} showIcon={true}/>
+        <Header title={"Leitura"} showIcon={true} goBackButton={false}/>
         <Loader loading={this.props.loading}/>
         <ConnectedCategories />
         <ConnectedPostList />

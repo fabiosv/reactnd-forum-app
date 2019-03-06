@@ -1,9 +1,18 @@
 import React, { Component } from 'react'
+import {object, func} from 'prop-types'
 import Swal from 'sweetalert2'
 import { IoMdCreate, IoMdTrash, IoIosContact } from "react-icons/io"
 import Vote from '../commons/vote'
 
 class CommentCard extends Component {
+  static propTypes = {
+    onUpdate: func.isRequired,
+    onDelete: func.isRequired,
+    onScoreUp: func.isRequired,
+    onScoreDown: func.isRequired,
+    comment: object.isRequired,
+  }
+
   onScoreUp = () => {
     const comment_id = this.props.comment.id;
     this.props.onScoreUp(comment_id)
