@@ -95,9 +95,9 @@ Remember that good React design practice is to create new JS files for each comp
 
 ## Backend Server
 
-To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
+The backend server is deployed at https://reactnd-forum-api.herokuapp.com, Instructions for the methods are in API_SERVICES.md
 
-
+## General Information
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
