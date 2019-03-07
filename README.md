@@ -88,7 +88,7 @@ To get started developing right away:
         │   ├── posts.js      # API related to posts
         │   ├── settings.js   # API settings (API_HOST, commons functions)
         │   └── shared.js     # getInitialData function to handle initial data fetch (if category specified, fetch post from this category otherwise fetch all posts)
-        └── alertController.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
+        └── alertController.js # Alerts Methods (success and error, confirmation modal)
 ```
 
 Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
