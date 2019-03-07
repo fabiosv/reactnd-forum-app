@@ -24,7 +24,7 @@ To get started developing right away:
 * start the development server with `npm start` or `yarn start`
 * also live at link https://reactnd-forum-app.herokuapp.com (may take a while on first load and after certain time without navigation)
 
-## What You're Getting
+## Project Structure
 ```bash
 ├── README.md       - This file.
 ├── API_SERVICES.md # The whitelisted services available from backend API + documentation
@@ -49,7 +49,7 @@ To get started developing right away:
     │   │   │   └── categories.js  # Categories component, used to navigate through them and filter posts
     │   │   ├── comment    # This is where components related to comments are stored
     │   │   │   ├── commentCard.js       # Card displaying comments info: comment, author, timestamp, current score and Vote Component, edit and delete button
-    │   │   │   ├── commentsContainer.js # List of Comments + Tools component to add and sort comments
+    │   │   │   ├── commentsContainer.js # List of Comments + Tools component to add and sort comments (connect component)
     │   │   │   ├── createComment.css    # Styles for CreateComment component
     │   │   │   └── createComment.js     # Component to create Comment
     │   │   ├── commons    # This is where generic components are stored
@@ -59,27 +59,35 @@ To get started developing right away:
     │   │   │   ├── tools.js   # Add and Sort button (for comment or post)
     │   │   │   └── vote.js    # Mechanism to Increase and Decrease Score rate (comment or post)
     │   │   └── post       # This is where components related to posts are stored
-    │   │   │   ├── postCard.js       # Card displaying post title, body, authors, comment count, current score and Vote Component, edit and delete button
-    │   │   │   ├── posts.css         # Styles for postCard and commentCard
-    │   │   │   └── postsContainer.js # List of Posts + Tools component to add and sort posts
-    │   └── views        # This is where react components related to views/route are stored
-    │       ├── mainPage.css   # Card displaying book cover, title and authors, Menu to choose shelf
-    │       ├── mainPage.js    # Card displaying book cover, title and authors, Menu to choose shelf
-    │       ├── managePost.css # Card displaying book cover, title and authors, Menu to choose shelf
-    │       ├── managePost.js  # Card displaying book cover, title and authors, Menu to choose shelf
-    │       └── postDetail.js  # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │       ├── postCard.js       # Card displaying post title, body, authors, comment count, current score and Vote Component, edit and delete button
+    │   │       ├── posts.css         # Styles for postCard and commentCard
+    │   │       └── postsContainer.js # List of Posts + Tools component to add and sort posts (connect component)
+    │   └── views        # This is where react components related to views/route are stored (connect components)
+    │       ├── mainPage.css   # Styles for MainPage Component
+    │       ├── mainPage.js    # 'Main Page' and 'Category Page' serving at '/' and '/:category'
+    │       ├── managePost.css # Styles for ManagePost Component
+    │       ├── managePost.js  # 'New Post' view serving at '/post/create-update/new' to create and '/post/create-update/:post-id' to edit Post
+    │       └── postDetail.js  # 'Post Details' view serving at '/:category/:post-id'
     ├── middleware  # This is where redux middleware are stored
+    │   ├── index.js    # This is where Redux 'applyMiddleware' is stored, it mix all middlewares used for this React-Redux Project
+    │   └── logger.js   # A Redux Middleware to log all actions events on browser's console
     ├── reducers    # This is where redux reducers are stored
-    ├── index.css   # Global styles. You probably won't need to change anything here.
-    ├── index.js    # You should not need to modify this file. It is used for DOM rendering only.
+    │   ├── categories.js       # Category reducer
+    │   ├── comments.js         # Comments reducer
+    │   ├── index.js            # This is where Redux 'combineReducers' is stored, it mix all reducers used for this React-Redux Project
+    │   ├── loading.js          # Loading reducer
+    │   ├── posts.js            # Posts reducer
+    │   └── selectedCategory.js # SelectedCategory reducer (used when user switch category from Categories Component, so highlight selected category/button)
+    ├── index.css   # Global styles
+    ├── index.js    # This is where Redux Store is created, importing 'combineReducers' and 'applyMiddleware'
     ├── serviceWorker.js # You should not need to modify this file. It is used for DOM rendering only.
     └── utils       # This is where helpers code are stored as API integration
         ├── API # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-        │   ├── categories.js # Card displaying book cover, title and authors, Menu to choose shelf
-        │   ├── comments.js # Card displaying book cover, title and authors, Menu to choose shelf
-        │   ├── posts.js # Card displaying book cover, title and authors, Menu to choose shelf
-        │   ├── settings.js # Card displaying book cover, title and authors, Menu to choose shelf
-        │   └── shared.js # Card displaying book cover, title and authors, Menu to choose shelf
+        │   ├── categories.js # API related to categories
+        │   ├── comments.js   # API related to comments
+        │   ├── posts.js      # API related to posts
+        │   ├── settings.js   # API settings (API_HOST, commons functions)
+        │   └── shared.js     # getInitialData function to handle initial data fetch (if category specified, fetch post from this category otherwise fetch all posts)
         └── alertController.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
 ```
 
