@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import {connect} from "react-redux"
-import { withRouter } from "react-router-dom"
 import * as Alert from "../../utils/alertController"
 import PostCard from "../components/post/postCard"
 import {handlePostScoredUp, handlePostScoredDown, handleDeletePost} from "../../actions/posts"
@@ -38,7 +37,6 @@ class PostDetail extends Component {
           () => {
             Alert.showAlert("Post Deleted!", true)
             this.props.history.push("/")
-
             // this.props.history.goBack()
           }
         ))
@@ -89,9 +87,3 @@ export default connect((state) => ({
   comments: state.comments,
   loading: state.loading
 }))(PostDetail)
-
-// export default withRouter(connect((state) => ({
-//   posts: state.posts,
-//   comments: state.comments,
-//   loading: state.loading
-// }))(PostDetail))
