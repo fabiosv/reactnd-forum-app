@@ -22,6 +22,7 @@ To get started developing right away:
 * install all project dependencies with `npm install` or `yarn install`
 * install all project dependencies with `npm install --no-bin-links` if you are using Vagrant or VirtualBox
 * start the development server with `npm start` or `yarn start`
+* also live at link https://reactnd-forum-app.herokuapp.com (may take a while on first load and after certain time without navigation)
 
 ## What You're Getting
 ```bash
@@ -47,26 +48,26 @@ To get started developing right away:
     │   │   │   ├── categories.css # Styles for categories component
     │   │   │   └── categories.js  # Categories component, used to navigate through them and filter posts
     │   │   ├── comment    # This is where components related to comments are stored
-    │   │   │   ├── commentCard.js       # Card displaying book cover, title and authors, Menu to choose shelf
-    │   │   │   ├── commentsContainer.js # Card displaying book cover, title and authors, Menu to choose shelf
-    │   │   │   ├── createComment.css    # Card displaying book cover, title and authors, Menu to choose shelf
-    │   │   │   └── createComment.js     # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   ├── commentCard.js       # Card displaying comments info: comment, author, timestamp, current score and Vote Component, edit and delete button
+    │   │   │   ├── commentsContainer.js # List of Comments + Tools component to add and sort comments
+    │   │   │   ├── createComment.css    # Styles for CreateComment component
+    │   │   │   └── createComment.js     # Component to create Comment
     │   │   ├── commons    # This is where generic components are stored
-    │   │   │   ├── header.js  # Card displaying book cover, title and authors, Menu to choose shelf
-    │   │   │   ├── loader.css # Card displaying book cover, title and authors, Menu to choose shelf
-    │   │   │   ├── loader.js  # Card displaying book cover, title and authors, Menu to choose shelf
-    │   │   │   ├── tools.js   # Card displaying book cover, title and authors, Menu to choose shelf
-    │   │   │   └── vote.js    # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   ├── header.js  # Header Component
+    │   │   │   ├── loader.css # Styles for loader
+    │   │   │   ├── loader.js  # Loader Component
+    │   │   │   ├── tools.js   # Add and Sort button (for comment or post)
+    │   │   │   └── vote.js    # Mechanism to Increase and Decrease Score rate (comment or post)
     │   │   └── post       # This is where components related to posts are stored
-    │   │   │   ├── postCard.js  # Card displaying book cover, title and authors, Menu to choose shelf
-    │   │   │   ├── posts.css   # Card displaying book cover, title and authors, Menu to choose shelf
-    │   │   │   └── postsContainer.js    # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   ├── postCard.js       # Card displaying post title, body, authors, comment count, current score and Vote Component, edit and delete button
+    │   │   │   ├── posts.css         # Styles for postCard and commentCard
+    │   │   │   └── postsContainer.js # List of Posts + Tools component to add and sort posts
     │   └── views        # This is where react components related to views/route are stored
-    │       ├── mainPage.css # Card displaying book cover, title and authors, Menu to choose shelf
-    │       ├── mainPage.js # Card displaying book cover, title and authors, Menu to choose shelf
+    │       ├── mainPage.css   # Card displaying book cover, title and authors, Menu to choose shelf
+    │       ├── mainPage.js    # Card displaying book cover, title and authors, Menu to choose shelf
     │       ├── managePost.css # Card displaying book cover, title and authors, Menu to choose shelf
-    │       ├── managePost.js # Card displaying book cover, title and authors, Menu to choose shelf
-    │       └── postDetail.js # Card displaying book cover, title and authors, Menu to choose shelf
+    │       ├── managePost.js  # Card displaying book cover, title and authors, Menu to choose shelf
+    │       └── postDetail.js  # Card displaying book cover, title and authors, Menu to choose shelf
     ├── middleware  # This is where redux middleware are stored
     ├── reducers    # This is where redux reducers are stored
     ├── index.css   # Global styles. You probably won't need to change anything here.
