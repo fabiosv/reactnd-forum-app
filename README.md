@@ -1,3 +1,95 @@
+# Readable Project
+
+This project is an assessment project for Udacity's React Fundamentals course. The goal is practice the fundamentals learning
+in the course as control components, state management, functional components, Route and so on.
+
+The following features should be implemented (to be accepted):
+- Display 4 views : 'Main Page', 'Category Page', 'Post Details', 'New Post'
+- User may create, read, edit and delete a Post
+- User may create, read, edit and delete a Comment within Post
+- User may vote on Comment and Post
+- User may sort Post/Comments by Vote Score or Date
+- User may read comments from a post
+- User may read Posts from their categories, if url indicate a wrong category but Post exist so show 404 page
+- When User delete a Post and try read this post so show 404 page.
+- Category Page should display its posts
+- Post Details should display post with main attributes + related comments
+
+## TL;DR
+
+To get started developing right away:
+
+* install all project dependencies with `npm install` or `yarn install`
+* install all project dependencies with `npm install --no-bin-links` if you are using Vagrant or VirtualBox
+* start the development server with `npm start` or `yarn start`
+
+## What You're Getting
+```bash
+├── README.md       - This file.
+├── API_SERVICES.md # The whitelisted services available from backend API + documentation
+├── package.json    # npm package manager file. It's unlikely that you'll need to modify this.
+├── public
+│   ├── favicon.ico   # React Icon, You may change if you wish.
+│   └── index.html    # DO NOT MODIFY
+│   └── manifest.json # DO NOT MODIFY
+└── src
+    ├── App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
+    ├── actions     # This is where redux actions are stored
+    │   ├── categories.js # Categories actions to be dispatched to reducer
+    │   ├── comments.js   # Comments actions to be dispatched to reducer
+    │   ├── posts.js      # Posts actions to be dispatched to reducer
+    │   └── shared.js     # Commons actions to be dispatched to reducer
+    ├── components  # This is where react components and views are stored
+    │   ├── App.css     # Styles for your app. Feel free to customize this as you desire.
+    │   ├── App.js      # This is the root of the app. Contains routes to related views.
+    │   ├── components   # This is where react components invoked by views are stored
+    │   │   ├── categories # This is where components related to categorie are stored
+    │   │   │   ├── categories.css # Styles for categories component
+    │   │   │   └── categories.js  # Categories component, used to navigate through them and filter posts
+    │   │   ├── comment    # This is where components related to comments are stored
+    │   │   │   ├── commentCard.js       # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   ├── commentsContainer.js # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   ├── createComment.css    # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   └── createComment.js     # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   ├── commons    # This is where generic components are stored
+    │   │   │   ├── header.js  # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   ├── loader.css # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   ├── loader.js  # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   ├── tools.js   # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   └── vote.js    # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   └── post       # This is where components related to posts are stored
+    │   │   │   ├── postCard.js  # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   ├── posts.css   # Card displaying book cover, title and authors, Menu to choose shelf
+    │   │   │   └── postsContainer.js    # Card displaying book cover, title and authors, Menu to choose shelf
+    │   └── views        # This is where react components related to views/route are stored
+    │       ├── mainPage.css # Card displaying book cover, title and authors, Menu to choose shelf
+    │       ├── mainPage.js # Card displaying book cover, title and authors, Menu to choose shelf
+    │       ├── managePost.css # Card displaying book cover, title and authors, Menu to choose shelf
+    │       ├── managePost.js # Card displaying book cover, title and authors, Menu to choose shelf
+    │       └── postDetail.js # Card displaying book cover, title and authors, Menu to choose shelf
+    ├── middleware  # This is where redux middleware are stored
+    ├── reducers    # This is where redux reducers are stored
+    ├── index.css   # Global styles. You probably won't need to change anything here.
+    ├── index.js    # You should not need to modify this file. It is used for DOM rendering only.
+    ├── serviceWorker.js # You should not need to modify this file. It is used for DOM rendering only.
+    └── utils       # This is where helpers code are stored as API integration
+        ├── API # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
+        │   ├── categories.js # Card displaying book cover, title and authors, Menu to choose shelf
+        │   ├── comments.js # Card displaying book cover, title and authors, Menu to choose shelf
+        │   ├── posts.js # Card displaying book cover, title and authors, Menu to choose shelf
+        │   ├── settings.js # Card displaying book cover, title and authors, Menu to choose shelf
+        │   └── shared.js # Card displaying book cover, title and authors, Menu to choose shelf
+        └── alertController.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
+```
+
+Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
+
+## Backend Server
+
+To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
