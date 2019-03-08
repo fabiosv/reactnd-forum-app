@@ -79,7 +79,7 @@ class ManagePost extends Component {
       this.props.dispatch(handleAddPost(
         this.state.posts,
         () => {
-          Alert.showAlert('Post Saved!', true, true)
+          Alert.showAlert('Post Saved!', true)
           // this.props.history.push("/") //not working :(
           this.setState((currentState) => ({
             toHome: true,
@@ -90,7 +90,12 @@ class ManagePost extends Component {
     } else {
       this.props.dispatch(handleUpdatePost(
         this.state.posts,
-        () => {Alert.showAlert('Post Edited!', true, true)},
+        () => {
+          Alert.showAlert('Post Edited!', true)
+          this.setState((currentState) => ({
+            toHome: true,
+          }))
+        },
         () => {Alert.showAlert('Ops! Something went wrong, please try again', false)}
       ))
     }

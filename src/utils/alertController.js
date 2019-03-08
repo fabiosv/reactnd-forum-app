@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
 
-export const showAlert = (message, sucess=true, redirectHome=false) => {
+export const showAlert = (message, sucess=true) => {
   Swal.fire({
     type: sucess ? 'success' : 'error',
     text: message,
@@ -9,11 +9,7 @@ export const showAlert = (message, sucess=true, redirectHome=false) => {
     position: 'top-end',
     showConfirmButton: false,
     timer: 2000
-  }).then((r) => {
-    if(redirectHome){
-      // window.location.href="/" //walkaround for react-router-dom
-    }
-  });
+  })
 }
 
 export const showConfirmAlert = (message, title="Are you sure?") =>
