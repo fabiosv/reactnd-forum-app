@@ -11,7 +11,7 @@ export const showAlert = (message, sucess=true, redirectHome=false) => {
     timer: 2000
   }).then((r) => {
     if(redirectHome){
-      window.location.href="/" //walkaround for react-router-dom
+      //window.location.href="/" //walkaround for react-router-dom
     }
   });
 }
