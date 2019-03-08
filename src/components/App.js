@@ -8,10 +8,6 @@ import ConnectedManagePost from './views/managePost'
 import ConnectedPostDetail from './views/postDetail'
 
 class App extends Component {
-  getState = () => {
-    console.log(this.store.getState())
-  }
-
   render() {
     return (
       <div className="App">
