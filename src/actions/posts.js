@@ -79,7 +79,7 @@ export function handleUpdatePost(post, sucs_calb_fn, err_calb_fn) {
   return (dispatch) => {
     return API.updatePost(post.id, post)
       .then((p) => {
-        dispatch(updatePost(post))
+        dispatch(updatePost([p]))
         sucs_calb_fn()
       })
       .catch((error) =>{

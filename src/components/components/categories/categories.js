@@ -17,8 +17,8 @@ class Categories extends Component {
         <h4>Categories</h4>
         <ul>
           <li className='col-12'>
-            {/* <Link to="/" className={selectedCategory === 'all' ? 'btn button active' : 'btn button'}
-              >All Posts</Link> */}
+            <Link to="/" className={selectedCategory === 'all' ? 'btn button active' : 'btn button'}
+              >All Posts</Link>
             <a href="/" className={selectedCategory === 'all' ? 'btn button active' : 'btn button'}
               >All Posts</a>
           </li>
