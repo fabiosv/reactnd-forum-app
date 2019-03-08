@@ -20,7 +20,7 @@ export function selectCategory(selectedCategory){
 export function handleReceiveCategories() {
   return (dispatch) => {
     return API.fetchCategories()
-      .then((categories) => dispatch(receiveCategories(categories)))
+      .then((categories) => dispatch(receiveCategories(categories.categories)))
       .catch((error) =>{
         console.log(`Post ID: ${error} not found`)
       })

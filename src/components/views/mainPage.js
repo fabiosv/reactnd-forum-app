@@ -33,10 +33,10 @@ class MainPage extends Component {
   }
 }
 
-export default connect((state) => ({
-  loading: state.loading,
-}))(MainPage)
-
-// export default withRouter(connect((state) => ({
+// export default connect((state) => ({
 //   loading: state.loading,
-// }))(MainPage))
+// }))(MainPage)
+
+export default withRouter(connect((state) => ({
+  loading: state.loading,
+}))(MainPage))

@@ -55,9 +55,9 @@ class ManagePost extends Component {
         }))
       }
     }
-    if(typeof(this.props.categories.categories) === 'object'){
-      if(this.props.categories.categories.length > 0 && this.state.categories.length === 0) {
-        const {categories} = this.props.categories
+    if(typeof(this.props.categories) === 'object'){
+      if(this.props.categories.length > 0 && this.state.categories.length === 0) {
+        const {categories} = this.props
         this.setState((currentState) => ({
           categories: categories,
         }))
@@ -97,7 +97,6 @@ class ManagePost extends Component {
   }
 
   render(){
-    const {id} = this.props.match.params;
     const { loading } = this.state.modeCreation ? this.state : this.props;
     const {posts, categories, toHome} = this.state;
     if(toHome) {

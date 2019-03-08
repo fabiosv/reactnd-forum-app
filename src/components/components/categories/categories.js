@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import './categories.css'
 import {selectCategory} from '../../../actions/categories'
-import { withRouter, Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class Categories extends Component {
   changeSelection = (new_selection) => {
@@ -17,8 +17,10 @@ class Categories extends Component {
         <h4>Categories</h4>
         <ul>
           <li className='col-12'>
-            <a className={selectedCategory === 'all' ? 'btn button active' : 'btn button'}
-              href="/">All Posts</a>
+            {/* <Link to="/" className={selectedCategory === 'all' ? 'btn button active' : 'btn button'}
+              >All Posts</Link> */}
+            <a href="/" className={selectedCategory === 'all' ? 'btn button active' : 'btn button'}
+              >All Posts</a>
           </li>
           {categories.map((category) => (
             <li className='col-12' key={category.path}>
@@ -34,7 +36,7 @@ class Categories extends Component {
   }
 }
 
-export default connect((state) => ({
+export default withRouter(connect((state) => ({
   categories: state.categories,
   selectedCategory: state.selectedCategory,
-}))(Categories)
+}))(Categories))
