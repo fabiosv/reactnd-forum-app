@@ -38,6 +38,7 @@ To get started developing right away:
     ├── actions     # This is where redux actions are stored
     │   ├── categories.js # Categories actions to be dispatched to reducer
     │   ├── comments.js   # Comments actions to be dispatched to reducer
+    │   ├── loading.js   # Loading actions to be dispatched to reducer (control Loader)
     │   ├── posts.js      # Posts actions to be dispatched to reducer
     │   └── shared.js     # Commons actions to be dispatched to reducer
     ├── components  # This is where react components and views are stored

@@ -1,4 +1,5 @@
 import * as API from '../utils/API/shared'
+import {loaded} from './loading'
 import {receiveCategories, selectCategory} from './categories'
 import {receivePosts} from './posts'
 
@@ -12,6 +13,7 @@ export function handleInitialData (category) {
       dispatch(receiveCategories(categories.categories))
       dispatch(receivePosts(posts))
       dispatch(selectCategory(category))
+      dispatch(loaded())
     })
   }
 }

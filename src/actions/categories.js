@@ -1,4 +1,5 @@
 import * as API from '../utils/API/categories'
+import {loaded} from './loading'
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 
@@ -20,9 +21,13 @@ export function selectCategory(selectedCategory){
 export function handleReceiveCategories() {
   return (dispatch) => {
     return API.fetchCategories()
-      .then((categories) => dispatch(receiveCategories(categories.categories)))
+      .then((categories) => {
+        dispatch(receiveCategories(categories.categories))
+        dispatch(loaded())
+      })
       .catch((error) =>{
         console.log(`Post ID: ${error} not found`)
+        dispatch(loaded())
       })
   }
 }

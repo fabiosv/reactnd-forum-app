@@ -1,4 +1,5 @@
 import * as API from '../utils/API/posts'
+import { loaded } from  './loading'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST_INFO = 'RECEIVE_POST_INFO'
@@ -66,10 +67,12 @@ export function handleAddPost(post, sucs_calb_fn, err_calb_fn) {
     return API.addNewPost(post)
       .then((p) => {
         dispatch(addPost([p]))
+        dispatch(loaded())
         sucs_calb_fn()
       })
       .catch((error) =>{
         console.log(`Post Add Action: ${error} not found`)
+        dispatch(loaded())
         err_calb_fn()
       })
   }
@@ -80,10 +83,12 @@ export function handleUpdatePost(post, sucs_calb_fn, err_calb_fn) {
     return API.updatePost(post.id, post)
       .then((p) => {
         dispatch(updatePost([p]))
+        dispatch(loaded())
         sucs_calb_fn()
       })
       .catch((error) =>{
         console.log(`Post Update Action: ${error} not found`)
+        dispatch(loaded())
         err_calb_fn()
       })
   }
@@ -105,9 +110,13 @@ export function handleDeletePost(post, sucs_calb_fn) {
 export function handleReceivePostInfo(post_id) {
   return (dispatch) => {
     return API.getPost(post_id)
-      .then((post) => dispatch(receivePostInfo([post])))
+      .then((post) => {
+        dispatch(receivePostInfo([post]))
+        dispatch(loaded())
+      })
       .catch((error) =>{
         console.log(`Post ID: ${post_id} not found`)
+        dispatch(loaded())
       })
   }
 }

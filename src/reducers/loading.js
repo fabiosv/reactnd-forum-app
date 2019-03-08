@@ -1,17 +1,17 @@
 import {RECEIVE_CATEGORIES} from '../actions/categories'
 import {RECEIVE_POSTS, RECEIVE_POST_INFO} from '../actions/posts'
-import { ADD_COMMENT } from '../actions/comments'
+import { LOADED } from '../actions/loading'
 
 
 export default function loading (state = true, action) {
   switch(action.type) {
     case RECEIVE_CATEGORIES :
-      return false
+      return true
     case RECEIVE_POSTS :
-      return false
+      return true
     case RECEIVE_POST_INFO :
-      return false
-    case ADD_COMMENT :
+      return true
+    case LOADED :
       return false
     default :
       return state

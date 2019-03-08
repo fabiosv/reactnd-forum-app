@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
 import {connect} from "react-redux"
 import * as Alert from "../../utils/alertController"
 import PostCard from "../components/post/postCard"
@@ -57,19 +57,23 @@ class PostDetail extends Component {
   render(){
     const { posts, loading } = this.props;
     const { id, category } = this.props.match.params;
-    console.log(posts)
-    if(loading){
-      return(<Loader loading={loading}/>)
+    console.log(posts.length)
+    // when this component is loaded after mainPage, it comes with previous posts in store
+    // but here we want just one post
+    if (loading || posts.length > 1) {
+      return(
+        <Fragment>
+          <Header title={"Post Details"} goBackButton={true} showIcon={false} />
+          <Loader loading={loading || posts.length > 1}/>
+        </Fragment>
+      )
     }
     return(
       <div>
         <Header title={"Post Details"} goBackButton={true} showIcon={false} />
         <Loader loading={loading}/>
-        {!loading && !this.isPostFounded()
-          ? (
-            <div>404 Post Not Found :(</div>
-          )
-          : (posts.map((post) => (
+        {this.isPostFounded()
+          ? (posts.map((post) => (
             <div className="col-md-8 offset-md-2" key={post.id}>
               <PostCard
                 post={post}
@@ -79,6 +83,9 @@ class PostDetail extends Component {
               <ConnectedCommentsContainer parentID={id} category={category}/>
             </div>
           )))
+          : (
+            <div>404 Post Not Found :(</div>
+          )
         }
       </div>
     )
