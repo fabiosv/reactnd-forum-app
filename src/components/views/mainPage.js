@@ -18,7 +18,14 @@ class MainPage extends Component {
     const { dispatch } = this.props
     console.log(category)
     dispatch(handleInitialData(category))
-    this.forceUpdate()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.category !== prevProps.match.params.category) {
+      const { category } = this.props.match.params
+      const { dispatch } = this.props
+      dispatch(handleInitialData(category))
+    }
   }
 
   render(){

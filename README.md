@@ -15,9 +15,6 @@ The following features should be implemented (to be accepted):
 - Category Page should display its posts
 - Post Details should display post with main attributes + related comments
 
-Known issues:
-- Redirect and Link seems not work, actual behaviour: the URL change to desired URL but page not load (stay white), on React tab/debbuger the Route stay on previous component. If you click on Link bar and press enter the component load desired page normally. (walkaround: use ```window.location.href="/"```)
-
 ## TL;DR
 
 To get started developing right away:

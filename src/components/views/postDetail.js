@@ -58,6 +58,9 @@ class PostDetail extends Component {
     const { posts, loading } = this.props;
     const { id, category } = this.props.match.params;
     console.log(posts)
+    if(loading){
+      return(<Loader loading={loading}/>)
+    }
     return(
       <div>
         <Header title={"Post Details"} goBackButton={true} showIcon={false} />

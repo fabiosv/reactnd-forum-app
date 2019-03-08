@@ -1,7 +1,8 @@
-import React from 'react'
-import {bool, string, func} from 'prop-types'
-import {FaPlus, FaFilter} from 'react-icons/fa'
-import '../../views/mainPage.css'
+import React from "react"
+import { Link } from "react-router-dom"
+import {bool, string, func} from "prop-types"
+import {FaPlus, FaFilter} from "react-icons/fa"
+import "../../views/mainPage.css"
 
 function Tools (props) {
   const { isActionLink, goTo, onClickAction, addTitle } = props;
@@ -9,14 +10,14 @@ function Tools (props) {
     <span className="tools">
       {isActionLink
         ? (
-          <a href={goTo}
+          <Link to={goTo}
             id="add-post-comment"
             title={addTitle}
             style={{
               paddingRight: "10px",
               color: "#343a40",
             }}
-            alt={`Button to ${addTitle}`}><FaPlus/></a>
+            alt={`Button to ${addTitle}`}><FaPlus/></Link>
         ) : (
           <button
             onClick={(e) => onClickAction()}
@@ -25,7 +26,7 @@ function Tools (props) {
             className="button1"
             style={{
               paddingRight: "10px",
-              color: "#343a40",
+              color: "#343A40",
             }}
             alt={`Button to ${addTitle}`}><FaPlus/></button>
         )

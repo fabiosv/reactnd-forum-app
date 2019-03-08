@@ -11,7 +11,7 @@ function Loader (props) {
   `;
   const {loading} = props;
   return (
-    <div className='loader'>
+    <div className={loading ? "loader" : "loader invisible"}>
       <PacmanLoader
         css={override}
         sizeUnit={"px"}

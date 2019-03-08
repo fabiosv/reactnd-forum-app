@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import './categories.css'
-import {selectCategory} from '../../../actions/categories'
-import { Link, withRouter } from 'react-router-dom'
+import React, { Component } from "react"
+import {connect} from "react-redux"
+import "./categories.css"
+import {selectCategory} from "../../../actions/categories"
+import { Link, withRouter } from "react-router-dom"
 
 class Categories extends Component {
   changeSelection = (new_selection) => {
@@ -13,21 +13,19 @@ class Categories extends Component {
   render(){
     const {categories, selectedCategory} = this.props;
     return(
-      <div id='categories' className='col-3'>
+      <div id="categories" className="col-3">
         <h4>Categories</h4>
         <ul>
-          <li className='col-12'>
-            <Link to="/" className={selectedCategory === 'all' ? 'btn button active' : 'btn button'}
+          <li className="col-12">
+            <Link to="/" className={selectedCategory === "all" ? "btn button active" : "btn button"}
               >All Posts</Link>
-            <a href="/" className={selectedCategory === 'all' ? 'btn button active' : 'btn button'}
-              >All Posts</a>
           </li>
           {categories.map((category) => (
-            <li className='col-12' key={category.path}>
-              <a
-                className={selectedCategory === category.name ? 'btn button active' : 'btn button'}
-                href={`/${category.name}`}
-              >{category.name}</a>
+            <li className="col-12" key={category.path}>
+              <Link
+                className={selectedCategory === category.name ? "btn button active" : "btn button"}
+                to={`/${category.name}`}
+              >{category.name}</Link>
             </li>
           ))}
         </ul>
